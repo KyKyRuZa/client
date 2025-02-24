@@ -1,0 +1,133 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #354049;
+}
+
+.auth-form {
+    background: #D9D9D9;
+    border-radius: 12px;
+    border: 2px solid #E0E0E0;
+    padding: 40px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.auth-header {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.auth-header p {
+    font-size: 32px;
+    font-weight: 600;
+    color: #333333;
+    margin: 0;
+}
+
+.form-group {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666666;
+}
+
+.form-group input {
+    width: 90%;
+    padding: 12px 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #20B2AA;
+}
+
+.auth-button {
+    width: 98%;
+    padding: 14px;
+    background: #e6b30c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background: #c4980a;
+}
+
+.error-message {
+    color: #DC2626;
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.auth-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.auth-links p {
+    margin: 12px 0;
+    font-size: 14px;
+    color: #666666;
+}
+
+.auth-links a {
+    color: #2563EB;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+.back-arrow{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    color: #666666;
+    cursor: pointer;
+}
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+.checkbox-label span {
+    display: inline;
+    margin-left: 10px;
+}
+
+.checkbox-label a {
+    color: #2563EB;
+
+}
