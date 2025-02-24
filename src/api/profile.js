@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://213.108.198.68/api';
+const API_URL = 'http://213.108.198.68:5000/api';
 
 const profileService = {
     async fetchProducts() {
