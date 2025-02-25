@@ -21,7 +21,7 @@ const ProfileInfo = ({ user }) => (
 );
 
 const AdminInfo = ({ user }) => {
-    if (user?.role !== 'admin') return null;
+    if (user?.role !== 'администратор') return null;
     
     return (
         <div className="detail-card">

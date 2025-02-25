@@ -56,7 +56,7 @@ const Navbar = ({ setActiveView }) => {
           <ShoppingCartIcon />
           {!isCollapsed && <span>Корзина</span>}
         </div>
-        {user?.role === 'admin' && (
+        {user?.role === 'администратор' && (
           <>
             <div className="nav-item" onClick={() => handleViewChange('catalog')}>
               <ViewListIcon />
