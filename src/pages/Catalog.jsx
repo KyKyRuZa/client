@@ -52,7 +52,7 @@ const Catalog = () => {
                   className="card-img"
                   style={{
                     backgroundImage: product.imageUrl
-                      ? `url(https://213.108.198.68:5000${product.imageUrl})`
+                      ? `url(http://213.108.198.68:5000${product.imageUrl})`
                       : "url(https://via.placeholder.com/150)",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
