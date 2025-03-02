@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://delron.ru:5000/api/auth';
+const API_URL = 'https://213.108.198.68:5000/api/auth';
 
 class UserService {
   async getUserProfile() {
