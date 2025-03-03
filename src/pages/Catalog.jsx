@@ -11,7 +11,6 @@ const Catalog = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
 
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -52,7 +51,7 @@ const Catalog = () => {
                   className="card-img"
                   style={{
                     backgroundImage: product.imageUrl
-                      ? `url(https://delron.ru${product.imageUrl})`
+                      ? `url(http://delron.ru${product.imageUrl})`
                       : "url(https://via.placeholder.com/150)",
                     backgroundSize: "cover",
                     backgroundPosition: "center",

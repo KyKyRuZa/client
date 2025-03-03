@@ -1,79 +1,61 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../components/Auth/Auth';
 import Navbar from '../components/UI/NavbarProfile';
-import '../styles/dashboard.css';
-import '../styles/global.css';
-import profileService from '../api/profile'; // Импортируем новый сервис
+import profileService from '../api/profile'; 
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+
 import { IconButton } from '@mui/material';
 
-const ProfileInfo = ({ user }) => (
-    <div className="detail-card">
-        <h1 className="detail-title">{user?.firstName || ''} {user?.lastName || ''}</h1>
-        <div className="detail-content">
-            <p>Email: {user?.email || 'Не указан'}</p>
-            <p>Телефон: {user?.phone || 'Не указан'}</p>
-            <p>Дата регистрации: {new Date(user?.createdAt).toLocaleDateString()}</p>
-        </div>
-    </div>
-);
+import '../styles/main.css';
+const ProfileInfo = ({user}) => (
+    <>
+        <div className="profile-card">
+            <div className="user-card">
+                <div className="profile-name">{user?.firstName || ''} {user?.lastName || ''}</div>
+                <div>{new Date(user?.createdAt).toLocaleDateString()}</div>
 
-const AdminInfo = ({ user }) => {
-    if (user?.role !== 'администратор') return null;
-    
-    return (
-        <div className="detail-card">
-            <h3 className="detail-title">Дополнительная информация</h3>
-            <div className="detail-content">
-                <p>Статус: {user?.status}</p>
-                <p>Последний вход: {user?.lastLogin ? new Date(user?.lastLogin).toLocaleString() : 'Не указано'}</p>
-            </div>
-        </div>
-    );
-};
-
-const Sells = () => {
-    const [sales, setSales] = useState([]);
-
-    return (
-        <div className="detail-card">
-            <h3 className="detail-title">Продажи</h3>
-            <div className="detail-content">
-                {sales.length === 0 ? (
-                    <p>У вас пока нет продаж</p>
-                ) : (
-                    <div className="sales-history">
-                        {sales.map(sale => (
-                            <div key={sale.id} className="sale-item">
-                                <div className="sale-header">
-                                    <span>Продажа №{sale.id}</span>
-                                    <span>{sale.date.toLocaleDateString()}</span>
-                                </div>
-                                <div className="sale-details">
-                                    {sale.items.map(item => (
-                                        <div key={item.name} className="sale-item-detail">
-                                            <span>{item.name}</span>
-                                            <span>Количество: {item.quantity}</span>
-                                            <span>{item.price} ₽</span>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="sale-total">
-                                    Итого: {sale.total} ₽
-                                </div>
-                            </div>
-                        ))}
+                <div className="profile-content">
+                    <div className='profile-title'> Контактные данные</div>
+                    <div className='profile-info'> 
+                        <div>Телефон</div>
+                        <div className='right'>{user?.phone || '-'}</div> 
                     </div>
-                )}
+                    <div className='profile-info'> 
+                        <div>Email</div> 
+                        <div className='right'>{user?.email || '-'}</div>
+                    </div>
+                </div>
             </div>
+            
+        
+        {user?.role === 'администратор' && (
+            <div className="admin-card">
+                
+                <div className="profile-content">
+                    <div className="profile-title">Дополнительная информация</div>
+                    <div className='profile-info'> 
+                        <div>Статус</div>
+                        <div className='right'>{user?.status}</div > 
+                    </div>
+                    <div className='profile-info'> 
+                        <div>Последний вход</div>
+                        <div className='right'>{user?.lastLogin ? new Date(user?.lastLogin).toLocaleString() : 'Не указано'}</div>
+                    </div>
+                </div>
+            </div>
+        )}
+
         </div>
-    );
-};
+    </>
+);
 
 const Catalog = () => {
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchStatus, setSearchStatus] = useState('');
     const [isAddingProduct, setIsAddingProduct] = useState(false);
     const [newProduct, setNewProduct] = useState({
         name: '',
@@ -87,11 +69,11 @@ const Catalog = () => {
             try {
                 const productsData = await profileService.fetchProducts(); // Используем сервис
                 setProducts(productsData);
+                setFilteredProducts(productsData);
             } catch (error) {
                 console.error('Ошибка при загрузке продуктов:', error);
             }
         };
-
         fetchProducts();
     }, []);
 
@@ -131,12 +113,44 @@ const Catalog = () => {
         }
     };
 
-    return (
-        <div>
-            <div className="catalog-header">
-                <div className='detail-title ctl'>Каталог продуктов  <AddIcon className="add" onClick={() => setIsAddingProduct(!isAddingProduct)}/></div>        
-            </div>
+   const handleSearch = (e) => {
+        const term = e.target.value.toLowerCase();
+        setSearchTerm(term);
+        
+        if (!term.trim()) {
+            setFilteredProducts(products);
+            setSearchStatus('');
+            return;
+        }
 
+        const filtered = products.filter(product => 
+            product.id.toString().includes(term) || 
+            product.name.toLowerCase().includes(term)
+        );
+
+        setFilteredProducts(filtered);
+        setSearchStatus(filtered.length ? 'found' : 'not-found');
+    };
+
+    return (
+        <>
+            <div className="catalog-header">
+                <div className='catalog-title ctl'>Каталог продуктов  </div>
+                
+                <AddIcon className="add" onClick={() => setIsAddingProduct(!isAddingProduct)}/>        
+            </div>
+            <div className="search-container">
+                <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    placeholder="Поиск по ID или названию"
+                    className="search-input"
+                />
+                {searchStatus === 'not-found' && (
+                        <div className="search-feedback">Ничего не найдено</div>
+                    )}
+            </div>
             {isAddingProduct ? (
                 <form onSubmit={handleSubmit} className="add-product-form">
                     <input
@@ -168,33 +182,115 @@ const Catalog = () => {
                         placeholder="Цена"
                         required
                     />
-                    <button type="submit">Сохранить товар</button>
+                    <button type="submit" className='ctlbtn'>Сохранить товар</button>
                 </form>
             ) : (
                 <div className="product-list">
-                    {products.length === 0 ? (
+                    {filteredProducts.length === 0 ? (
                         <p>Нет доступных продуктов.</p>
                     ) : (
-                        products.map((product) => (
-                            <div key={product.id} className="product-item">
-                                <div className="product-content">
-                                    <h3>{product.name}</h3>
-                                    <p>{product.description}</p>
-                                    <p>Цена: {product.price} ₽</p>
-                                </div>
-                                <div className="product-actions">
-                                    <IconButton className="icon-button edit">
-                                        <EditIcon />
-                                    </IconButton>
-                                    <IconButton className="icon-button delete" onClick={() => handleDelete(product.id)}>
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </div>
-                            </div>
-                        ))
+                        <table className="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Название</th>
+                                    <th>Описание</th>
+                                    <th>Цена (₽)</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filteredProducts.map((product) => (
+                                    <tr key={product.id}>
+                                        <td>{highlightText(product.id.toString(), searchTerm)}</td>
+                                        <td>{highlightText(product.name, searchTerm)}</td>
+                                        <td>{product.description}</td>
+                                        <td>{product.price}</td>
+                                        <td>
+                                            <IconButton className="icon-button edit">
+                                                <EditIcon />
+                                            </IconButton>
+                                            <IconButton className="icon-button delete" onClick={() => handleDelete(product.id)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                            {/* <tbody>
+                                {products.map((product) => (
+                                    <tr key={product.id}>
+                                        <td>{product.id}</td>
+                                        <td>{product.name}</td>
+                                        <td>{product.description}</td>
+                                        <td>{product.price}</td>
+                                        <td>
+                                            <IconButton className="icon-button edit">
+                                                <EditIcon />
+                                            </IconButton>
+                                            <IconButton className="icon-button delete" onClick={() => handleDelete(product.id)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody> */}
+                        </table>
                     )}
                 </div>
             )}
+        </>
+    );
+};
+
+const highlightText = (text, searchTerm) => {
+    if (!searchTerm) return text;
+    
+    const parts = text.toString().split(new RegExp(`(${searchTerm})`, 'gi'));
+    return parts.map((part, index) => 
+        part.toLowerCase() === searchTerm.toLowerCase() 
+            ? <span key={index} className="highlight">{part}</span>
+            : part
+    );
+};
+
+
+const Orders = () => {
+    const [orders, setOrders] = useState([]);
+    return (
+        <div className="order-card">
+            <h3 className="order-title">Заказы</h3>
+            <div className="order-content">
+                {orders.length === 0 ? (
+                    <p>У вас пока нет заказов</p>
+                ) : (
+                    <div className="order-history">
+                        {orders.map(order => (
+                            <div key={order.id} className="order-item">
+                                <div className="order-header">
+                                    <span>Заказ №{order.id}</span>
+                                    <span>{order.date.toLocaleDateString()}</span>
+                                    <span className={`order-status ${order.status.toLowerCase()}`}>
+                                        {order.status}
+                                    </span>
+                                </div>
+                                <div className="order-profiles">
+                                    {order.items.map(item => (
+                                        <div key={item.name} className="order-item-profile">
+                                            <span>{item.name}</span>
+                                            <span>Количество: {item.quantity}</span>
+                                            <span>{item.price} ₽</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="order-total">
+                                    Итого: {order.total} ₽
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
@@ -271,7 +367,7 @@ const Basket = () => {
 
     return (
         <div className="basket-container">
-            <div className='detail-title'>Корзина</div>
+            <div className='basket-title'>Корзина</div>
             <div className="basket-items">
                 {basketItems.length === 0 ? (
                     <p>Ваша корзина пуста</p>
@@ -312,36 +408,34 @@ const Basket = () => {
     );
 }
 
-const Orders = ({ user }) => {
-    const [orders, setOrders] = useState([]);
+const Sells = () => {
+    const [sales, setSales] = useState([]);
+
     return (
-        <div className="detail-card">
-            <h3 className="detail-title">Заказы</h3>
-            <div className="detail-content">
-                {orders.length === 0 ? (
-                    <p>У вас пока нет заказов</p>
+        <div className="profile-card">
+            <h3 className="profile-title">Продажи</h3>
+            <div className="profile-content">
+                {sales.length === 0 ? (
+                    <p>У вас пока нет продаж</p>
                 ) : (
-                    <div className="order-history">
-                        {orders.map(order => (
-                            <div key={order.id} className="order-item">
-                                <div className="order-header">
-                                    <span>Заказ №{order.id}</span>
-                                    <span>{order.date.toLocaleDateString()}</span>
-                                    <span className={`order-status ${order.status.toLowerCase()}`}>
-                                        {order.status}
-                                    </span>
+                    <div className="sales-history">
+                        {sales.map(sale => (
+                            <div key={sale.id} className="sale-item">
+                                <div className="sale-header">
+                                    <span>Продажа №{sale.id}</span>
+                                    <span>{sale.date.toLocaleDateString()}</span>
                                 </div>
-                                <div className="order-details">
-                                    {order.items.map(item => (
-                                        <div key={item.name} className="order-item-detail">
+                                <div className="sale-profiles">
+                                    {sale.items.map(item => (
+                                        <div key={item.name} className="sale-item-profile">
                                             <span>{item.name}</span>
                                             <span>Количество: {item.quantity}</span>
                                             <span>{item.price} ₽</span>
                                         </div>
                                     ))}
                                 </div>
-                                <div className="order-total">
-                                    Итого: {order.total} ₽
+                                <div className="sale-total">
+                                    Итого: {sale.total} ₽
                                 </div>
                             </div>
                         ))}
@@ -353,18 +447,14 @@ const Orders = ({ user }) => {
 };
 
 const Profile = () => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
     const { user } = useAuth();
     const [activeView, setActiveView] = useState('profile');
 
     const renderContent = () => {
         switch(activeView) {
             case 'profile':
-                return (
-                    <div className='profile-details'>
-                        <ProfileInfo user={user} />
-                        <AdminInfo user={user} />
-                    </div>
-                );
+                return <ProfileInfo user = {user} />;
             case 'basket':
                 return <Basket />;
             case 'catalog':
@@ -372,21 +462,21 @@ const Profile = () => {
             case 'sells':
                 return <Sells />;
             case 'orders':
-                return <Orders user={user} />;
+                return <Orders/>;
             default:
                 return null;
         }
     };
 
     return (
-        <div>
-            <Navbar setActiveView={setActiveView} />
-            <div className="profile-container">
-                <div className="profile-details">
-                    {renderContent()}
-                </div>
+        <div className="profile-container">
+        <Navbar setActiveView={setActiveView} onCollapse={setIsCollapsed}  />
+        <main className={`main-content ${isCollapsed ? 'collapsed' : ''}`}>
+            <div className="dashboard-container">
+                {renderContent()}
             </div>
-        </div>
+        </main>
+    </div>
     );
 };
 

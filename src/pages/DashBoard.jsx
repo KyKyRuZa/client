@@ -4,7 +4,6 @@ import Footer from '../components/UI/Footer';
 import { ReactComponent as ForwardArrow }  from '../styles/assets/icons/arrow_forward.svg';
 import { ReactComponent as Car }  from '../styles/assets/icons/car.svg';
 import '../styles/dashboard.css';
-import '../styles/advantage.css';
 import '../styles/global.css';
 import Catalog from './Catalog';
 
