@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer>
        <div className="footer-container">
-          <div className="footer-left">Copyright © 2024 Delrone | All Rights Reserved </div>
+          <div className="footer-left">Copyright © 2024 Delron | All Rights Reserved </div>
           <div className="footer-right">
             <ul className='footer-links'>
               <li>Пользовательское соглашение</li>

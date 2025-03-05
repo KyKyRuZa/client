@@ -1,4 +1,5 @@
-import React, { useState }from 'react';
+import React from 'react';
+import { Link } from "react-router-dom"
 import Navbar from '../components/UI/Navbar';
 import Footer from '../components/UI/Footer';
 import { ReactComponent as ForwardArrow }  from '../styles/assets/icons/arrow_forward.svg';
@@ -17,7 +18,12 @@ const DashBoard = () => {
             <div>
               <div className='title'>Ваш автомобиль наш цвет</div>
               <div className="subtitle">Мы предлагаем услуги опытного колориста и широкий ассортимент высококачественных автомобильных красок, которые помогут вернуть вашему авто первозданный блеск или придать ему совершенно новый облик.</div>
-              <button className='btn'> <p className='text'> Каталог <ForwardArrow className="arw"/></p> </button>
+              <Link to="/catalog" className='btn'> 
+                <p className='text'> 
+                  Каталог 
+                  <ForwardArrow className="arw"/>
+                </p> 
+              </Link>
             </div>
               <Car className='car'/>
           </div>
@@ -58,9 +64,7 @@ const DashBoard = () => {
             
           </div>
         </main>
-        <main>
-          <Catalog />
-        </main>
+        
         <main> {/* Услуги */}
           <div className="services-container">
             <div className="title-primary">Услуги</div>
@@ -78,16 +82,15 @@ const DashBoard = () => {
             <div className="contact-info">
               <div className="card-info">
                   <div className='card-title'>Телефон</div>
-                  <p>+7 (917) 276-27-68</p>
+                  <div className="card-subtitle">+7 (917) 276-27-68</div>
               </div>
               <div className="card-info">
                 <div className='card-title'>Email</div>
-                <p>info@delron.ru</p>
-                <p>support@delron.ru</p>
+                <div className="card-subtitle">info@delron.ru</div>
               </div>
               <div className="card-info">
                 <div className='card-title'>Режим работы</div>
-                <p>Пн-Пт: 9:00 - 18:00</p>
+                <div className="card-subtitle">Пн-Пт: 9:00 - 18:00</div>
               </div>
             </div>
             <div className="map">

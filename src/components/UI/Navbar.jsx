@@ -1,23 +1,24 @@
-import React from 'react';
-import { Link, useNavigate } from "react-router-dom"
+import React, { useState } from 'react';
+import { Link } from "react-router-dom"
 import { useAuth } from '../Auth/Auth';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  const { user } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <header> 
         <nav className="header-container">
           <div className='nav-left'>
             <Link to="/"><div className="logo">Delron</div></Link>
           </div>
-          <div className="nav-right">
+          <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </div>
+          <div className={`nav-right ${isMenuOpen ? 'active' : ''}`}>
+              <Link to="/catalog" className='catal'> Каталог </Link>
               {user ? (
               <>
                 <Link to="/profile" className="profile-btn">

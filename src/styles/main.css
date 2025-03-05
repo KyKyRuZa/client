@@ -19,7 +19,7 @@ body{
 }
 .profile-title{
     padding-bottom: 15px;
-    font-size: 23px;
+    font-size: 24px;
     display: flex;
     align-items: center;
 }
@@ -36,116 +36,244 @@ body{
 }
 
 /* Catalog */
-
 .catalog-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 100%;
-    color: white;
-  }
-  
-  .catalog-title {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    font-weight: 600;
-    
-  }
-  .search-container {
-    position: relative;
-    margin: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #3c4651; /* Граница под заголовком */
+}
+
+.catalog-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Стили поиска */
+.search-container {
+  max-width: 250px;
+  border-radius: 4px;
+  margin: 1rem;
 }
 
 .search-input {
-    margin-left: -15px;
-    margin-bottom: 10px;
-    padding: 10px 15px;
-    border-radius: 6px;
-    border: 1px solid gray;
-    background: #34495E;
-    color: white;
-    width: 250px;
-    font-size: 14px;
-    transition: all 0.3s ease;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  background-color: #3c4651; /* Темно-серый фон */
+  color: #ffffff;
+  border-radius: 4px;
+  outline: none;
+  transition: background-color 0.3s ease;
 }
 
 .search-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  background-color: #495057; /* Сlightly lighter gray on focus */
 }
 
-.search-input::placeholder {
-    color: gray;
+.search-feedback {
+  color: #f56c6c; /* Красный для сообщений об ошибке */
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
-  .add {
-    cursor: pointer;
-    margin-left: 10px;
-    color: white;
-    width: 100%;
-  }
+
+/* Форма добавления товара */
+.add {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #4CAF50;
+}
+
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  padding: 20px;
+  background: #3c4651;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 0 auto;
+  align-items: center;
+}
+
+.add-product-form input,
+.add-product-form textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.add-product-form button {
+  padding: 12px;
+  width: 100%;
+  background: #252b31;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
   
-  .add-product-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 500px;
-    padding: 20px;
-    background:white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin: 0 auto;
-    align-items: center;
-  }
-  
-  .add-product-form input,
-  .add-product-form textarea {
-    padding: 10px;
-    border: 1px solid gray;
-    border-radius: 4px;
-  }
-  
-  .add-product-form .ctlbtn {
-    padding: 12px;
-    background: gray;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
- 
-  .admin-table {
-    width: 100%;
-    padding: 20px;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
-  
-  .admin-table th,
-  .admin-table td {
-    
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ECF0F1;
-  }
-  
-  .admin-table th {
-    background: #ECF0F1;
-    color: black;
-    font-weight: 600;
-  }
-  
-  .icon-button {
-    padding: 8px;
-    margin: 0 4px;
-  }
-  
-  .icon-button.edit {
-    color: #3498DB;
-  }
-  
-  .icon-button.delete {
-    color: #E74C3C;
-  }
-  
+}
+
+/* Список товаров */
+.product-list {
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  color: #ffffff;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #495057; /* Темная граница между строками */
+}
+
+.admin-table th {
+  background-color: #3c4651; /* Темно-серый фон для заголовков таблицы */
+  font-weight: bold;
+}
+
+.admin-table tr:nth-child(even) {
+  background-color: #32383e; /* Темно-серый для четных строк */
+}
+
+.admin-table tr:nth-child(odd) {
+  background-color: #282c34; /* Очень темный фон для нечетных строк */
+}
+
+.icon-button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.icon-button.edit {
+  color: #67c23a; /* Зеленый для редактирования */
+}
+
+.icon-button.edit:hover {
+  color: #4caf50; /* Насыщенный зеленый при наведении */
+}
+
+.icon-button.delete {
+  color: #f56c6c; /* Красный для удаления */
+}
+
+.icon-button.delete:hover {
+  color: #ff4d4f; /* Яркий красный при наведении */
+}
+
+/* Выделение найденного текста */
+.highlight {
+  background-color: #4caf50; /* Зеленый для выделения */
+  color: #ffffff;
+}
+/* Shop_Basket */
+/* Общие стили */
+.basket-container {
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.basket-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.basket-items {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Стиль каждого элемента корзины */
+.basket-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3c4651;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.basket-content {
+  flex: 1;
+}
+
+.basket-content h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.basket-content p {
+
+  font-size: 14px;
+  color: #d1d1d1;
+}
+
+.basket-quantity {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: #4f5b69;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+  background-color: #6c7a89;
+}
+
+.basket-actions {
+  display: flex;
+  align-items: center;
+}
+
+.amount{
+  text-align: center;
+}
+
+.icon-button.delete:hover {
+  background-color: #8641390c;
+}
+
+/* Итоговая сумма */
+.basket-total {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+  color: #fff;
+}
+
+/* Пустая корзина */
+.basket-items p {
+  margin: 10px;
+  font-size: 16px;
+  color: #d1d1d1;
+}

@@ -5,7 +5,6 @@ import profileService from '../api/profile';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-
 import { IconButton } from '@mui/material';
 
 import '../styles/main.css';
@@ -70,8 +69,9 @@ const Catalog = () => {
                 const productsData = await profileService.fetchProducts(); // Используем сервис
                 setProducts(productsData);
                 setFilteredProducts(productsData);
+                console.log('Filtered Products:', filteredProducts);
             } catch (error) {
-                console.error('Ошибка при загрузке продуктов:', error);
+                
             }
         };
         fetchProducts();
@@ -113,25 +113,42 @@ const Catalog = () => {
         }
     };
 
-   const handleSearch = (e) => {
+    const handleSearch = (e) => {
         const term = e.target.value.toLowerCase();
         setSearchTerm(term);
-        
+    
         if (!term.trim()) {
             setFilteredProducts(products);
             setSearchStatus('');
             return;
         }
-
-        const filtered = products.filter(product => 
+    
+        // Фильтруем продукты
+        let filtered = products.filter(product => 
             product.id.toString().includes(term) || 
             product.name.toLowerCase().includes(term)
         );
-
+    
+        // Сортируем результаты по порядку из исходного массива (если необходимо)
+        filtered = filtered.sort((a, b) => {
+            const indexA = products.indexOf(a);
+            const indexB = products.indexOf(b);
+            return indexA - indexB;
+        });
+    
         setFilteredProducts(filtered);
         setSearchStatus(filtered.length ? 'found' : 'not-found');
     };
-
+    const highlightText = (text, searchTerm) => {
+        if (!searchTerm) return text;
+        
+        const parts = text.toString().split(new RegExp(`(${searchTerm})`, 'gi'));
+        return parts.map((part, index) => 
+            part.toLowerCase() === searchTerm.toLowerCase() 
+                ? <span key={index} className="highlight">{part}</span>
+                : part
+        );
+    };
     return (
         <>
             <div className="catalog-header">
@@ -217,24 +234,6 @@ const Catalog = () => {
                                     </tr>
                                 ))}
                             </tbody>
-                            {/* <tbody>
-                                {products.map((product) => (
-                                    <tr key={product.id}>
-                                        <td>{product.id}</td>
-                                        <td>{product.name}</td>
-                                        <td>{product.description}</td>
-                                        <td>{product.price}</td>
-                                        <td>
-                                            <IconButton className="icon-button edit">
-                                                <EditIcon />
-                                            </IconButton>
-                                            <IconButton className="icon-button delete" onClick={() => handleDelete(product.id)}>
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody> */}
                         </table>
                     )}
                 </div>
@@ -242,18 +241,6 @@ const Catalog = () => {
         </>
     );
 };
-
-const highlightText = (text, searchTerm) => {
-    if (!searchTerm) return text;
-    
-    const parts = text.toString().split(new RegExp(`(${searchTerm})`, 'gi'));
-    return parts.map((part, index) => 
-        part.toLowerCase() === searchTerm.toLowerCase() 
-            ? <span key={index} className="highlight">{part}</span>
-            : part
-    );
-};
-
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
@@ -389,7 +376,7 @@ const Basket = () => {
                                             onClick={() => incrementQuantity(item.productId)}
                                         >+</button>
                                     </div>
-                                    <p>Цена: {item.totalAmount} ₽</p>
+                                    <p className='amount'>Цена: {item.totalAmount} ₽</p>
                                 </div>
                                 <div className="basket-actions">
                                     <IconButton className="icon-button delete">
