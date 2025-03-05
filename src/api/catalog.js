@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://delron.ru/api';
+const API_URL = 'http://localhost:5000/api';
 
 const catalogService = {
     async fetchProducts() {

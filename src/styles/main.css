@@ -36,25 +36,25 @@ body{
 }
 
 /* Catalog */
-
 .catalog-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #3c4651;
-  }
-  
-  .catalog-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ffffff;
-    
-  }
-  .search-container {
-    max-width: 250px;
-    border-radius: 4px;
-    margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #3c4651; /* Граница под заголовком */
+}
+
+.catalog-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Стили поиска */
+.search-container {
+  max-width: 250px;
+  border-radius: 4px;
+  margin: 1rem;
 }
 
 .search-input {
@@ -78,6 +78,8 @@ body{
   font-size: 0.9rem;
   margin-top: 0.5rem;
 }
+
+/* Форма добавления товара */
 .add {
   cursor: pointer;
   margin-left: 10px;

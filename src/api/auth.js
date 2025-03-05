@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://delron.ru/api/auth';
+const API_URL = 'http://localhost:5000/api/auth';
 
 const authService = {
     async register(userData) {

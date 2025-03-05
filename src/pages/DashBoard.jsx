@@ -1,10 +1,12 @@
-import React, { useState }from 'react';
+import React from 'react';
+import { Link } from "react-router-dom"
 import Navbar from '../components/UI/Navbar';
 import Footer from '../components/UI/Footer';
 import { ReactComponent as ForwardArrow }  from '../styles/assets/icons/arrow_forward.svg';
 import { ReactComponent as Car }  from '../styles/assets/icons/car.svg';
 import '../styles/dashboard.css';
 import '../styles/global.css';
+import Catalog from './Catalog';
 
 
 const DashBoard = () => { 
@@ -16,8 +18,9 @@ const DashBoard = () => {
             <div>
               <div className='title'>Ваш автомобиль наш цвет</div>
               <div className="subtitle">Мы предлагаем услуги опытного колориста и широкий ассортимент высококачественных автомобильных красок, которые помогут вернуть вашему авто первозданный блеск или придать ему совершенно новый облик.</div>
-              <Link to="/catalog" className='btn'>
-                <p className='text'> Каталог 
+              <Link to="/catalog" className='btn'> 
+                <p className='text'> 
+                  Каталог 
                   <ForwardArrow className="arw"/>
                 </p> 
               </Link>
@@ -61,6 +64,7 @@ const DashBoard = () => {
             
           </div>
         </main>
+        
         <main> {/* Услуги */}
           <div className="services-container">
             <div className="title-primary">Услуги</div>

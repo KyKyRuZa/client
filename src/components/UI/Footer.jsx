@@ -23,3 +23,8 @@ const Footer = () => {
 };
 
 export default Footer;
+{/* <div className="social-links">
+    <Link className = "Link" to="/"><TelegramIcon/></Link>
+    <Link className = "Link" to="/"><VKIcon/></Link>
+    <Link className = "Link" to="/"><WhatsAppIcon/></Link>
+</div>  */}

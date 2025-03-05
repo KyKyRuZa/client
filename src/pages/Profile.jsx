@@ -5,7 +5,6 @@ import profileService from '../api/profile';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-
 import { IconButton } from '@mui/material';
 
 import '../styles/main.css';
@@ -70,8 +69,9 @@ const Catalog = () => {
                 const productsData = await profileService.fetchProducts(); // Используем сервис
                 setProducts(productsData);
                 setFilteredProducts(productsData);
+                console.log('Filtered Products:', filteredProducts);
             } catch (error) {
-                console.error('Ошибка при загрузке продуктов:', error);
+                
             }
         };
         fetchProducts();
@@ -149,7 +149,6 @@ const Catalog = () => {
                 : part
         );
     };
-
     return (
         <>
             <div className="catalog-header">
@@ -242,7 +241,6 @@ const Catalog = () => {
         </>
     );
 };
-
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
