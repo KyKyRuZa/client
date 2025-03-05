@@ -18,7 +18,6 @@ const Navbar = () => {
             {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </div>
           <div className={`nav-right ${isMenuOpen ? 'active' : ''}`}>
-              <Link to="/catalog" className='catal'> Каталог </Link>
               {user ? (
               <>
                 <Link to="/profile" className="profile-btn">
