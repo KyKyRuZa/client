@@ -3,12 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './Auth';
 import '../../styles/auth.css'
 import { ReactComponent as BackArrow }  from '../../styles/assets/icons/arrow_back.svg';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { IconButton } from '@mui/material';
 
 const Register = () => {
     const [open, setOpen] = useState(false);
@@ -16,6 +13,11 @@ const Register = () => {
     const [severity, setSeverity] = useState('success');
     const navigate = useNavigate();
     const { register } = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -104,7 +106,7 @@ const Register = () => {
                     <div className="form-group">
                         <label htmlFor="password">Пароль</label>
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             id="password"
                             name="password"
                             value={formData.password}
@@ -112,18 +114,30 @@ const Register = () => {
                             required
                             minLength="6"
                         />
+                        <IconButton 
+                            onClick={togglePasswordVisibility}
+                            className="visibility-toggle"
+                        >
+                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        </IconButton>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="confirmPassword">Подтвердите пароль</label>
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             id="confirmPassword"
                             name="confirmPassword"
                             value={formData.confirmPassword}
                             onChange={handleChange}
                             required
                         />
+                        <IconButton 
+                            onClick={togglePasswordVisibility}
+                            className="visibility-toggle"
+                        >
+                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        </IconButton>
                     </div>
                     <div className="form-group checkbox-group">
                         <label className="checkbox-label">
@@ -141,11 +155,6 @@ const Register = () => {
                         Зарегистрироваться
                     </button>
                 </form>
-                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
-                    {message}
-                </Alert>
-                </Snackbar>
 
                 <div className="auth-links">
                     <p>

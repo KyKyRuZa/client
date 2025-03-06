@@ -26,6 +26,20 @@ const profileService = {
     async deleteProduct(productId) {
         await axios.delete(`${API_URL}/profile/${productId}`);
     },
+    async editProduct(productId, productData) {
+        const formData = new FormData();
+        formData.append('name', productData.name); 
+        formData.append('description', productData.description);
+        formData.append('price', productData.price);
+        formData.append('image', productData.image);
+
+        const response = await axios.put(`${API_URL}/profile/${productId}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return response.data;
+     },
 
     async fetchBasket(userId) {
         const response = await axios.get(`${API_URL}/profile/${userId}`);

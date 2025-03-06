@@ -56,6 +56,7 @@ const Catalog = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchStatus, setSearchStatus] = useState('');
     const [isAddingProduct, setIsAddingProduct] = useState(false);
+    const [editingProduct, setEditingProduct] = useState(false);
     const [newProduct, setNewProduct] = useState({
         name: '',
         description: '',
@@ -95,7 +96,11 @@ const Catalog = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await profileService.addProduct(newProduct); // Используем сервис
+            
+            const response = editingProduct 
+    ? await profileService.editProduct(editingProduct.id, newProduct)
+    : await profileService.addProduct(newProduct);
+
             setProducts([...products, response]);
             setIsAddingProduct(false);
             setNewProduct({ name: '', description: '', price: '', image: null });
@@ -110,6 +115,20 @@ const Catalog = () => {
             setProducts(products.filter(product => product.id !== productId));
         } catch (error) {
             console.error('Ошибка при удалении продукта:', error);
+        }
+    };
+
+    const handleEdit = async (productId) => {
+        const product = products.find(p => p.id === productId);
+        if (product) {
+            setEditingProduct(product);
+            setNewProduct({
+                name: product.name,
+                description: product.description,
+                price: product.price,
+                image: null
+            });
+            setIsAddingProduct(true);
         }
     };
 
@@ -224,7 +243,7 @@ const Catalog = () => {
                                         <td>{product.description}</td>
                                         <td>{product.price}</td>
                                         <td>
-                                            <IconButton className="icon-button edit">
+                                            <IconButton className="icon-button edit" onClick={() => handleEdit(product.id)}>
                                                 <EditIcon />
                                             </IconButton>
                                             <IconButton className="icon-button delete" onClick={() => handleDelete(product.id)}>

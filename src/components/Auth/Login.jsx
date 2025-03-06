@@ -4,13 +4,9 @@ import { useAuth } from './Auth';
 import '../../styles/auth.css'
 import '../../styles/global.css'
 import { ReactComponent as BackArrow }  from '../../styles/assets/icons/arrow_back.svg';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { IconButton } from '@mui/material';
 
 const Login = () => {
     const [open, setOpen] = useState(false);
@@ -18,6 +14,11 @@ const Login = () => {
     const [severity, setSeverity] = useState('success');
     const navigate = useNavigate();
     const { login } = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
+    
+        const togglePasswordVisibility = () => {
+            setShowPassword(!showPassword);
+        };
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -76,13 +77,19 @@ const Login = () => {
                     <div className="form-group">
                         <label htmlFor="password">Пароль</label>
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             id="password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
                             required
                         />
+                        <IconButton 
+                            onClick={togglePasswordVisibility}
+                            className="visibility-toggle"
+                        >
+                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        </IconButton>
                     </div>
 
                     
@@ -91,11 +98,6 @@ const Login = () => {
                         Войти
                     </button>
                 </form>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                    <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
-                        {message}
-                    </Alert>
-                </Snackbar>
                 <div className="auth-links">                   
                     <p>
                         Нет аккаунта ?{' '}
