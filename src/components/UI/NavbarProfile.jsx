@@ -14,7 +14,7 @@ import '../../styles/profile.css';
 const Navbar = ({ setActiveView, onCollapse }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const handleLogout = () => {
     logout();

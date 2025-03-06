@@ -277,3 +277,81 @@ body{
   font-size: 16px;
   color: #d1d1d1;
 }
+@media (max-width: 425px) {
+  
+  .main-content {
+    transition: margin-left 0.5s ease;
+    margin: 92px 100px;
+  }
+  
+  .user-card, .admin-card {
+      width: 100%;
+  }
+
+  /* Заголовок профиля */
+  .profile-title {
+      font-size: 18px;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  /* Информация профиля */
+  .profile-info {
+    font-size: 15px;
+    gap: 10px; 
+  }
+  .profile-info .right{
+    font-size: 15px;
+  }
+
+  /* Каталог */
+  .catalog-header {
+      flex-direction: column; 
+      align-items: flex-start;
+      gap: 10px; 
+  }
+
+  .search-container {
+      max-width: 100%; 
+      margin: 0; 
+  }
+
+  /* Форма добавления товара */
+  .add-product-form {
+      max-width: 100%;
+      padding: 15px;
+  }
+
+  /* Таблица товаров */
+  .admin-table th,
+  .admin-table td {
+      font-size: 14px; 
+  }
+
+  /* Корзина */
+  .basket-container {
+      width: 130%;
+  }
+  .basket-item {
+      gap: 30px;
+  }
+
+  .basket-content {
+    display: flex;
+    flex-direction:column;
+    text-align: center;
+  }
+
+  .basket-quantity {
+      justify-content: center;
+  }
+
+  .basket-actions {
+      flex-direction: column;
+  }
+
+  /* Итоговая сумма */
+  .basket-total {
+      text-align: right;
+  }
+}

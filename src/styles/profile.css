@@ -122,4 +122,63 @@
   background: rgba(255,77,77,0.1);
 }
 
+@media (max-width: 425px) {
+  .collapse-btn {
+    display: none;
+  }
+  .sidebar {
+    width: 170px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+ 
+  .nav-header {
+    padding: 12px 16px; 
+  }
+  .sidebar.collapsed .sidebar-header, 
+  .nav-item,
+  .logout-btn{
+    justify-content: center;
+  }
+  .sidebar-header,
+  .user-profile,
+  .nav-item {
+    padding: 16px; 
+  }
 
+  .brand {
+    font-size: 20px; 
+    gap: 8px; 
+  }
+
+  .user-info {
+    font-size: 14px; 
+  }
+
+  .user-role {
+    font-size: 12px; 
+  }
+  .logout-btn {
+  
+    font-size: 14px; 
+    gap: 8px; 
+  }
+
+  .menu-toggle-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    background: #293138;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}
