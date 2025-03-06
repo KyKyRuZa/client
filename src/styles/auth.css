@@ -131,3 +131,8 @@
     color: #2563EB;
 
 }
+.visibility-toggle {
+    position: absolute !important;
+    color: #757575;
+    margin: 24px -50px !important;
+}

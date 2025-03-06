@@ -114,11 +114,8 @@ const Register = () => {
                             required
                             minLength="6"
                         />
-                        <IconButton 
-                            onClick={togglePasswordVisibility}
-                            className="visibility-toggle"
-                        >
-                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        <IconButton  onClick={togglePasswordVisibility} className="visibility-toggle">
+                            {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon />}
                         </IconButton>
                     </div>
 
@@ -132,11 +129,8 @@ const Register = () => {
                             onChange={handleChange}
                             required
                         />
-                        <IconButton 
-                            onClick={togglePasswordVisibility}
-                            className="visibility-toggle"
-                        >
-                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        <IconButton  onClick={togglePasswordVisibility} className="visibility-toggle">
+                            {showPassword ? <VisibilityOffIcon className='visibility-toggle-icon'/> : <VisibilityIcon className='visibility-toggle-icon'/>}
                         </IconButton>
                     </div>
                     <div className="form-group checkbox-group">

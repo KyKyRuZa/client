@@ -117,21 +117,17 @@ const Catalog = () => {
             console.error('Ошибка при удалении продукта:', error);
         }
     };
-
-    const handleEdit = async (productId) => {
-        const product = products.find(p => p.id === productId);
-        if (product) {
-            setEditingProduct(product);
-            setNewProduct({
-                name: product.name,
-                description: product.description,
-                price: product.price,
-                image: null
-            });
-            setIsAddingProduct(true);
-        }
+    const handleEdit = (product) => {
+        setIsAddingProduct(false);
+        setNewProduct({
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            image: null
+        });
+        setIsAddingProduct(true);
     };
-
+    
     const handleSearch = (e) => {
         const term = e.target.value.toLowerCase();
         setSearchTerm(term);
@@ -243,7 +239,7 @@ const Catalog = () => {
                                         <td>{product.description}</td>
                                         <td>{product.price}</td>
                                         <td>
-                                            <IconButton className="icon-button edit" onClick={() => handleEdit(product.id)}>
+                                            <IconButton className="icon-button edit" onClick={() => handleEdit(product)}>
                                                 <EditIcon />
                                             </IconButton>
                                             <IconButton className="icon-button delete" onClick={() => handleDelete(product.id)}>

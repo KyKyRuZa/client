@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './Auth';
 import '../../styles/auth.css'
-import '../../styles/global.css'
 import { ReactComponent as BackArrow }  from '../../styles/assets/icons/arrow_back.svg';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -84,10 +83,7 @@ const Login = () => {
                             onChange={handleChange}
                             required
                         />
-                        <IconButton 
-                            onClick={togglePasswordVisibility}
-                            className="visibility-toggle"
-                        >
+                        <IconButton  onClick={togglePasswordVisibility} className="visibility-toggle">
                             {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                         </IconButton>
                     </div>
