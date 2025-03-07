@@ -6,7 +6,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { IconButton } from '@mui/material';
-import io from 'socket.io-client';
 
 import '../styles/main.css';
 
@@ -454,24 +453,26 @@ const Sells = () => {
 const Profile = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const { user } = useAuth();
-    const [activeView, setActiveView] = useState('profile');
+    const [activeView, setActiveView] = useState('profile');   
     const [userData, setUserData] = useState(user);
-    const socket = io('https://delron.ru');
 
     useEffect(() => {
-        socket.on('userUpdated', (updatedUser) => {
+        const socket = new WebSocket('wss://delron.ru'); // Замените на ваш WebSocket URL
+
+        socket.onmessage = (event) => {
+            const updatedUser = JSON.parse(event.data);
             setUserData(updatedUser);
-        });
+        };
 
         return () => {
-            socket.disconnect();
+            socket.close();
         };
-    }, [socket]);
+    }, []);
 
     const renderContent = () => {
         switch(activeView) {
             case 'profile':
-                return <ProfileInfo user = {user} />;
+                return <ProfileInfo user = {userData} />;
             case 'basket':
                 return <Basket />;
             case 'catalog':
