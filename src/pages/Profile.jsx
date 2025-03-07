@@ -8,6 +8,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { IconButton } from '@mui/material';
 
 import '../styles/main.css';
+
+
 const ProfileInfo = ({user}) => (
     <>
         <div className="profile-card">
@@ -452,7 +454,19 @@ const Profile = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const { user } = useAuth();
     const [activeView, setActiveView] = useState('profile');
+    const [userData, setUserData] = useState(user)
+    useEffect(() => {
+        const socket = new WebSocket('ws://delron.ru');
 
+        socket.onmessage = (event) => {
+            const updatedUser = JSON.parse(event.data);
+            setUserData(updatedUser);
+        };
+
+        return () => {
+            socket.close();
+        };
+    }, []);
     const renderContent = () => {
         switch(activeView) {
             case 'profile':
