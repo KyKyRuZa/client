@@ -52,7 +52,7 @@ const Catalog = () => {
                   className="card-img"
                   style={{
                     backgroundImage: product.imageUrl
-                      ? `url(http://localhost:5000${product.imageUrl})`
+                      ? `url(https://delron.ru${product.imageUrl})`
                       : "url(https://via.placeholder.com/150)",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
