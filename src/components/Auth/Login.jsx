@@ -10,7 +10,6 @@ import { IconButton } from '@mui/material';
 const Login = () => {
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState('');
-    const [severity, setSeverity] = useState('success');
     const navigate = useNavigate();
     const { login } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
@@ -36,22 +35,12 @@ const Login = () => {
         try {
             await login(formData);
             setMessage('Успешный вход!');
-            setSeverity('success');
             navigate('/profile');
         } catch (err) {
             setMessage('Ошибка при входе :(');
-            setSeverity('error');
         }
         setOpen(true);
     };
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
-    };
-
-
     return (
         <div className="auth-container">
             <div className="auth-form">

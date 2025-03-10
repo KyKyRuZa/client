@@ -10,7 +10,6 @@ import { IconButton } from '@mui/material';
 const Register = () => {
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState('');
-    const [severity, setSeverity] = useState('success');
     const navigate = useNavigate();
     const { register } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
@@ -34,20 +33,20 @@ const Register = () => {
         event.preventDefault();
         if (!accepted) {
             setMessage('Вы должны принять условия использования');
-            setSeverity('error');
+            
         }
         if (formData.password !== formData.confirmPassword) {
             setMessage('Пароли не совпадают');
-            setSeverity('error');           
+                      
         }
         try {
             await register(formData);
             setMessage('Регистрация прошла успешно!');
-            setSeverity('success');
+            
             navigate('/profile');
         } catch (error) {
             setMessage('Ошибка при регистрации');
-            setSeverity('error');
+            
         }
         setOpen(true);
     };
@@ -56,12 +55,6 @@ const Register = () => {
             ...formData,
             [e.target.name]: e.target.value
         });
-    };
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
     };
 
     return (
