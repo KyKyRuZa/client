@@ -51,9 +51,7 @@ const Catalog = () => {
                 <div
                   className="card-img"
                   style={{
-                    backgroundImage: product.imageUrl
-                      ? `url(https://delron.ru${product.imageUrl})`
-                      : "url(https://via.placeholder.com/150)",
+                    backgroundImage:`url(https://delron.ru${product.imageUrl})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
