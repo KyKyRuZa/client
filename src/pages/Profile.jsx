@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../components/Auth/Auth';
 import Navbar from '../components/UI/NavbarProfile';
-import profileService from '../api/profile'; 
+import productService from '../api/product'; 
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
@@ -69,7 +69,7 @@ const Catalog = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const productsData = await profileService.fetchProducts(); // Используем сервис
+                const productsData = await productService.fetchProducts(); // Используем сервис
                 setProducts(productsData);
                 setFilteredProducts(productsData);
                 console.log('Filtered Products:', filteredProducts);
@@ -100,8 +100,8 @@ const Catalog = () => {
         try {
             
             const response = editingProduct 
-    ? await profileService.editProduct(editingProduct.id, newProduct)
-    : await profileService.addProduct(newProduct);
+    ? await productService.editProduct(editingProduct.id, newProduct)
+    : await productService.addProduct(newProduct);
 
             setProducts([...products, response]);
             setIsAddingProduct(false);
@@ -113,7 +113,7 @@ const Catalog = () => {
 
     const handleDelete = async (productId) => {
         try {
-            await profileService.deleteProduct(productId); // Используем сервис
+            await productService.deleteProduct(productId); // Используем сервис
             setProducts(products.filter(product => product.id !== productId));
         } catch (error) {
             console.error('Ошибка при удалении продукта:', error);
@@ -306,7 +306,7 @@ const Basket = () => {
     useEffect(() => {
         const fetchBasket = async () => {
             try {
-                const basketData = await profileService.fetchBasket(user.id); // Используем сервис
+                const basketData = await productService.fetchBasket(user.id); // Используем сервис
                 setBasketItems(basketData);
             } catch (error) {
                 console.error('Ошибка при получении корзины:', error);
@@ -320,7 +320,7 @@ const Basket = () => {
 
     const incrementQuantity = async (productId) => {
         try {
-            const response = await profileService.incrementQuantity(user.id, productId); // Используем сервис
+            const response = await productService.incrementQuantity(user.id, productId); // Используем сервис
             if (response) {
                 setBasketItems(prevItems => 
                     prevItems.map(item => 
@@ -341,7 +341,7 @@ const Basket = () => {
     
     const decrementQuantity = async (productId) => {
         try {
-            const response = await profileService.decrementQuantity(user.id, productId); // Используем сервис
+            const response = await productService.decrementQuantity(user.id, productId); // Используем сервис
             if (response) {
                 setBasketItems(prevItems => 
                     prevItems.map(item => 
@@ -362,7 +362,7 @@ const Basket = () => {
 
     const removeFromCart = async (productId) => {
         try {
-            await profileService.removeFromCart(user.id, productId); // Используем сервис
+            await productService.removeFromCart(user.id, productId); // Используем сервис
             setBasketItems(basketItems.filter(item => item.productId !== productId));
         } catch (error) {
             console.error('Error removing from cart:', error);
