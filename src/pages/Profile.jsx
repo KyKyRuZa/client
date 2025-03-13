@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../components/Auth/Auth';
 import Navbar from '../components/UI/NavbarProfile';
 import productService from '../api/product'; 
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { IconButton } from '@mui/material';
 
 import '../styles/main.css';
-
-
 const ProfileInfo = ({user}) => (
     <>
         <div className="profile-card">
@@ -58,27 +55,29 @@ const Catalog = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchStatus, setSearchStatus] = useState('');
     const [isAddingProduct, setIsAddingProduct] = useState(false);
-    const [editingProduct, setEditingProduct] = useState(false);
     const [newProduct, setNewProduct] = useState({
         name: '',
         description: '',
         price: '',
-        image: null,
+        img: null,
+        category: '',
+        status: 'active',
+        paymentStatus: 'unpaid'
     });
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const productsData = await productService.fetchProducts(); // Используем сервис
-                setProducts(productsData);
-                setFilteredProducts(productsData);
-                console.log('Filtered Products:', filteredProducts);
-            } catch (error) {
-                
-            }
-        };
-        fetchProducts();
+        loadProducts();
     }, []);
+
+    const loadProducts = async () => {
+        try {
+            const productsData = await productService.fetchProducts();
+            setProducts(productsData);
+            setFilteredProducts(productsData);
+        } catch (error) {
+            console.error('Error loading products:', error);
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -98,38 +97,45 @@ const Catalog = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            
-            const response = editingProduct 
-    ? await productService.editProduct(editingProduct.id, newProduct)
-    : await productService.addProduct(newProduct);
-
-            setProducts([...products, response]);
+            if (newProduct.id) {
+                await productService.updateProduct(newProduct.id, newProduct);
+            } else {
+                await productService.addProduct(newProduct);
+            }
+            loadProducts();
             setIsAddingProduct(false);
-            setNewProduct({ name: '', description: '', price: '', image: null });
+            setNewProduct({
+                name: '',
+                description: '',
+                price: '',
+                img: null,
+                category: '',
+                status: 'active',
+                paymentStatus: 'unpaid'
+            });
         } catch (error) {
-            console.error('Ошибка при добавлении продукта:', error);
+            console.error('Error saving product:', error);
         }
     };
 
     const handleDelete = async (productId) => {
         try {
-            await productService.deleteProduct(productId); // Используем сервис
+            await productService.deleteProduct(productId); 
             setProducts(products.filter(product => product.id !== productId));
         } catch (error) {
             console.error('Ошибка при удалении продукта:', error);
         }
     };
-    const handleEdit = (product) => {
-        setIsAddingProduct(false);
-        setNewProduct({
-            name: product.name,
-            description: product.description,
-            price: product.price,
-            image: null
-        });
-        setIsAddingProduct(true);
+    const handleEdit = async (productId) => {
+        try {
+            const productToEdit = await productService.editProduct(productId);
+            setNewProduct(productToEdit);
+            setIsAddingProduct(true);
+        } catch (error) {
+            console.error('Error loading product for edit:', error);
+        }
     };
-    
+
     const handleSearch = (e) => {
         const term = e.target.value.toLowerCase();
         setSearchTerm(term);
@@ -140,13 +146,11 @@ const Catalog = () => {
             return;
         }
     
-        // Фильтруем продукты
         let filtered = products.filter(product => 
             product.id.toString().includes(term) || 
             product.name.toLowerCase().includes(term)
         );
-    
-        // Сортируем результаты по порядку из исходного массива (если необходимо)
+
         filtered = filtered.sort((a, b) => {
             const indexA = products.indexOf(a);
             const indexB = products.indexOf(b);
@@ -166,12 +170,13 @@ const Catalog = () => {
                 : part
         );
     };
+
     return (
         <>
             <div className="catalog-header">
                 <div className='catalog-title ctl'>Каталог продуктов  </div>
                 
-                <AddIcon className="add" onClick={() => setIsAddingProduct(!isAddingProduct)}/>        
+                <FontAwesomeIcon icon={faPlus} className="add" onClick={() => setIsAddingProduct(!isAddingProduct)}/>        
             </div>
             <div className="search-container">
                 <input
@@ -191,8 +196,22 @@ const Catalog = () => {
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
-                        required
+                        required = {!newProduct.id}
                     />
+                    <select 
+                        value={newProduct.category} 
+                        onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })} 
+                        required
+                    >
+                        <option value="">Выберите категорию</option>
+                        <option value="Авто краски">Авто краски</option>
+                        <option value="Аэрозольные краски">Аэрозольные краски</option>
+                        <option value="Аэрозольные краски RAL/NCS/PANTONE">Аэрозольные краски RAL/NCS/PANTONE</option>
+                        <option value="Термостойкие краски">Термостойкие краски</option>
+                        <option value="Автоэмаль с кисточкой">Автоэмаль с кисточкой</option>
+                        <option value="Аэрозольные лаки">Аэрозольные лаки</option>
+                        <option value="Аэрозольные грунты">Аэрозольные грунты</option>
+                    </select>
                     <input
                         type="text"
                         name="name"
@@ -228,6 +247,7 @@ const Catalog = () => {
                                 <tr>
                                     <th>ID</th>
                                     <th>Название</th>
+                                    <th>Категория</th>
                                     <th>Описание</th>
                                     <th>Цена (₽)</th>
                                     <th>Действия</th>
@@ -238,14 +258,15 @@ const Catalog = () => {
                                     <tr key={product.id}>
                                         <td>{highlightText(product.id.toString(), searchTerm)}</td>
                                         <td>{highlightText(product.name, searchTerm)}</td>
+                                        <td>{product.category}</td>
                                         <td>{product.description}</td>
                                         <td>{product.price}</td>
                                         <td>
-                                            <IconButton className="icon-button edit" onClick={() => handleEdit(product)}>
-                                                <EditIcon />
+                                            <IconButton className="icon-button edit" onClick={() => handleEdit(product.id)}>
+                                                <FontAwesomeIcon icon={faEdit} />
                                             </IconButton>
                                             <IconButton className="icon-button delete" onClick={() => handleDelete(product.id)}>
-                                                <DeleteIcon />
+                                                <FontAwesomeIcon icon={faTrash} />
                                             </IconButton>
                                         </td>
                                     </tr>
@@ -397,7 +418,7 @@ const Basket = () => {
                                 </div>
                                 <div className="basket-actions">
                                     <IconButton className="icon-button delete">
-                                        <DeleteIcon onClick={() => removeFromCart(item.productId)} />
+                                    <FontAwesomeIcon icon={faTrash} onClick={() => removeFromCart(item.productId)} />
                                     </IconButton>
                                 </div>
                             </div>
@@ -453,26 +474,12 @@ const Sells = () => {
 const Profile = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const { user } = useAuth();
-    const [activeView, setActiveView] = useState('profile');   
-    const [userData, setUserData] = useState(user);
-
-    useEffect(() => {
-        const socket = new WebSocket('wss://delron.ru'); // Замените на ваш WebSocket URL
-
-        socket.onmessage = (event) => {
-            const updatedUser = JSON.parse(event.data);
-            setUserData(updatedUser);
-        };
-
-        return () => {
-            socket.close();
-        };
-    }, []);
+    const [activeView, setActiveView] = useState('profile');
 
     const renderContent = () => {
         switch(activeView) {
             case 'profile':
-                return <ProfileInfo user = {userData} />;
+                return <ProfileInfo user = {user} />;
             case 'basket':
                 return <Basket />;
             case 'catalog':

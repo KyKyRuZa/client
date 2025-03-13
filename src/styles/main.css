@@ -41,7 +41,7 @@ body{
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid #3c4651; /* Граница под заголовком */
+  border-bottom: 1px solid #3c4651; 
 }
 
 .catalog-title {
@@ -62,7 +62,7 @@ body{
   padding: 0.75rem;
   font-size: 1rem;
   border: none;
-  background-color: #3c4651; /* Темно-серый фон */
+  background-color: #3c4651;
   color: #ffffff;
   border-radius: 4px;
   outline: none;
@@ -70,11 +70,11 @@ body{
 }
 
 .search-input:focus {
-  background-color: #495057; /* Сlightly lighter gray on focus */
+  background-color: #495057; 
 }
 
 .search-feedback {
-  color: #f56c6c; /* Красный для сообщений об ошибке */
+  color: #f56c6c; 
   font-size: 0.9rem;
   margin-top: 0.5rem;
 }
@@ -99,7 +99,8 @@ body{
 }
 
 .add-product-form input,
-.add-product-form textarea {
+.add-product-form textarea,
+.add-product-form select {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -133,20 +134,20 @@ body{
 .admin-table td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid #495057; /* Темная граница между строками */
+  border-bottom: 1px solid #495057; 
 }
 
 .admin-table th {
-  background-color: #3c4651; /* Темно-серый фон для заголовков таблицы */
+  background-color: #3c4651;
   font-weight: bold;
 }
 
 .admin-table tr:nth-child(even) {
-  background-color: #32383e; /* Темно-серый для четных строк */
+  background-color: #32383e; 
 }
 
 .admin-table tr:nth-child(odd) {
-  background-color: #282c34; /* Очень темный фон для нечетных строк */
+  background-color: #282c34; 
 }
 
 .icon-button {
@@ -160,24 +161,23 @@ body{
 }
 
 .icon-button.edit {
-  color: #67c23a; /* Зеленый для редактирования */
+  color: #67c23a;
 }
 
 .icon-button.edit:hover {
-  color: #4caf50; /* Насыщенный зеленый при наведении */
+  color: #4caf50;
 }
 
 .icon-button.delete {
-  color: #f56c6c; /* Красный для удаления */
+  color: #f56c6c; 
 }
 
 .icon-button.delete:hover {
-  color: #ff4d4f; /* Яркий красный при наведении */
+  color: #ff4d4f;
 }
 
-/* Выделение найденного текста */
 .highlight {
-  background-color: #4caf50; /* Зеленый для выделения */
+  background-color: #4caf50;
   color: #ffffff;
 }
 /* Shop_Basket */
@@ -277,6 +277,8 @@ body{
   font-size: 16px;
   color: #d1d1d1;
 }
+
+
 @media (max-width: 425px) {
   
   .main-content {

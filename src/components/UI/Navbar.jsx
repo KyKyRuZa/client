@@ -3,14 +3,17 @@ import { Link } from "react-router-dom"
 import { useAuth } from '../Auth/Auth';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleUser} from '@fortawesome/free-solid-svg-icons'
 
 const Navbar = () => {
   const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  
   return (
     <header> 
-        <nav className="header-container">
+        <nav className="header-container" >
           <div className='nav-left'>
             <Link to="/"><div className="logo">Delron</div></Link>
           </div>
@@ -21,7 +24,8 @@ const Navbar = () => {
               {user ? (
               <>
                 <Link to="/profile" className="profile-btn">
-                  {user.username || 'Профиль'}
+                  <FontAwesomeIcon icon={faCircleUser} />  
+                  <span style={{ marginLeft: '8px' }}>{user.firstName}</span>
                 </Link>
               </>
             ) : (

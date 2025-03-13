@@ -2,7 +2,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  height: 100vh;
+  height: 100%;
   width: 250px;
   background: #293138;
   color: #fff;
@@ -12,6 +12,7 @@
 }
 .sidebar.collapsed {
   width: 72px;
+  height: 100%;
 }
 .nav-header {
   color: gray;
@@ -21,7 +22,9 @@
 .nav-header.collapsed{
   padding: 21px 24px 21px; 
 }
-
+.sidebar.collapsed .nav-item{
+  justify-content: center;
+}
 .sidebar-header {
   padding: 24px;
   display: flex;
@@ -98,6 +101,7 @@
   transition:  all 0.7s ease;
 }
 
+
 .sidebar-footer {
   position: absolute;
   bottom: 0;
@@ -121,6 +125,7 @@
 .logout-btn:hover {
   background: rgba(255,77,77,0.1);
 }
+
 
 @media (max-width: 425px) {
   .collapse-btn {

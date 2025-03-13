@@ -6,7 +6,6 @@ import { ReactComponent as ForwardArrow }  from '../styles/assets/icons/arrow_fo
 import { ReactComponent as Car }  from '../styles/assets/icons/car.svg';
 import '../styles/dashboard.css';
 import '../styles/global.css';
-import Catalog from './Catalog';
 
 
 const DashBoard = () => { 
