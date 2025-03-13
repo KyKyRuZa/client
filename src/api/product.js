@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://delron.ru/api';
+const API_URL = 'https://delron.ru/api/profile';
 
 const productService = {
     // Операции с продуктом
