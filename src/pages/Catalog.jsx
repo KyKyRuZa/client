@@ -12,6 +12,8 @@ const Catalog = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [error, setError] = useState('');
+  const [imageError, setImageError] = useState({});
+
 
   const categories = [
     "Авто краски",
@@ -82,8 +84,11 @@ const Catalog = () => {
                 <div
                   className="catalog-img"
                   style={{
-                    backgroundImage: `url(${product.imageUrl})`,
+                    backgroundImage: `url(${imageError[product.id] ? '../style/assets/default.png' : product.imageUrl})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover'
                   }}
+                  onError={() => setImageError(prev => ({...prev, [product.id]: true}))}
                 ></div>
                 <div className="title-catalog">{product.name}</div>
                 <div className="subtitle-catalog">{product.description}</div>
