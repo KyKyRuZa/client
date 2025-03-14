@@ -350,6 +350,8 @@ color: #d1d1d1;
 
 /* Форма добавления товара */
 .btn-add{
+  right: 20px;
+  bottom: 20px;
   width: 35px;
   height: 35px;
 }
