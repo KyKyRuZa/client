@@ -2,6 +2,7 @@
 body{
   background: #293138;
 }
+
 .main-content {
   transition: margin-left 0.5s ease;
   margin: 92px 300px;
@@ -40,7 +41,7 @@ body{
 display: flex;
 justify-content: space-between;
 align-items: center;
-padding: 1rem;
+padding: 16px;
 border-bottom: 1px solid #3c4651; 
 }
 
@@ -54,13 +55,13 @@ color: #ffffff;
 .search-container {
 max-width: 250px;
 border-radius: 4px;
-margin: 1rem;
+margin: 16px;
 }
 
 .search-input {
 width: 100%;
-padding: 0.75rem;
-font-size: 1rem;
+padding: 12px;
+font-size: 16px;
 border: none;
 background-color: #3c4651;
 color: #ffffff;
@@ -80,12 +81,29 @@ margin-top: 0.5rem;
 }
 
 /* Форма добавления товара */
-.add {
+.btn-add {
+position: fixed;
+right: 40px;
+bottom: 40px;
+background-color: #4CAF50;
+color: white;
+font-size: 20px;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
 cursor: pointer;
-margin-left: 10px;
-color: #4CAF50;
+box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+transition: all 0.3s ease;
 }
 
+.btn-add.rotate {
+transform: rotate(45deg);
+background-color: #f56c6c;
+
+}
 .add-product-form {
 display: flex;
 flex-direction: column;
@@ -94,7 +112,7 @@ padding: 20px;
 background: #3c4651;
 border-radius: 8px;
 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-margin: 0 auto;
+margin: 20px auto;
 align-items: center;
 }
 
@@ -291,8 +309,7 @@ color: #d1d1d1;
 @media (max-width: 425px) {
 
 .main-content {
-  transition: margin-left 0.5s ease;
-  margin: 92px 100px;
+  margin: 30px 30px;
 }
 
 .user-card, .admin-card {
@@ -316,32 +333,94 @@ color: #d1d1d1;
 }
 
 /* Каталог */
-.catalog-header {
-    flex-direction: column; 
-    align-items: flex-start;
-    gap: 10px; 
+.catalog-header{
+  border:none;
 }
-
+.catalog-title{
+  font-size: 20px;
+}
 .search-container {
-    max-width: 100%; 
+    max-width: 250px;
     margin: 0; 
 }
-
-/* Форма добавления товара */
-.add-product-form {
-    max-width: 100%;
-    padding: 15px;
+.search-container input::placeholder {
+  font-size: 12px;
 }
 
+
+/* Форма добавления товара */
+.btn-add{
+  width: 35px;
+  height: 35px;
+}
+.add-product-form {
+  width: 90%;
+  padding: 15px;
+  margin: 10px auto;
+}
+
+.add-product-form input,
+.add-product-form textarea,
+.add-product-form select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.add-product-form button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  font-size: 16px;
+}
 /* Таблица товаров */
-.admin-table th,
+.admin-table {
+  font-size: 14px;
+}
+
+.admin-table thead {
+  display: none;
+}
+
+.admin-table tr {
+  display: block;
+  margin-bottom: 15px;
+  background-color: #3c4651;
+  border-radius: 8px;
+  padding: 10px;
+}
+
 .admin-table td {
-    font-size: 14px; 
+  display: block;
+  text-align: left;
+  padding: 8px;
+  border: none;
+  position: relative;
+  word-wrap: break-word;
+  width: 100%;
+}
+
+.admin-table td:before {
+  font-weight: bold;
+  color: #a0a0a0;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.admin-table td:last-child {
+  border-bottom: 0;
+  text-align: center;
+}
+
+.icon-button {
+  font-size: 18px;
+  margin: 0 5px;
 }
 
 /* Корзина */
 .basket-container {
-    width: 120%;
+    max-width: 100%;
 }
 .basket-item {
     gap: 30px;

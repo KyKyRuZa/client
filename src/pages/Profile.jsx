@@ -3,7 +3,7 @@ import { useAuth } from '../components/Auth/Auth';
 import Navbar from '../components/UI/NavbarProfile';
 import productService from '../api/product'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faPlus,faTimes  } from '@fortawesome/free-solid-svg-icons';
 import { IconButton } from '@mui/material';
 
 import '../styles/main.css';
@@ -139,7 +139,7 @@ const Catalog = () => {
         setIsAddingProduct(true);
     };
     const handleSearch = (e) => {
-        const term = e.target.value.toLowerCase();
+        const term = e.target.value;
         setSearchTerm(term);
     
         if (!term.trim()) {
@@ -149,10 +149,9 @@ const Catalog = () => {
         }
     
         let filtered = products.filter(product => 
-            product.id.toString().includes(term) || 
-            product.name.toLowerCase().includes(term)
+            product.id.toString().includes(term)
         );
-
+    
         filtered = filtered.sort((a, b) => {
             const indexA = products.indexOf(a);
             const indexB = products.indexOf(b);
@@ -162,36 +161,31 @@ const Catalog = () => {
         setFilteredProducts(filtered);
         setSearchStatus(filtered.length ? 'found' : 'not-found');
     };
-    const highlightText = (text, searchTerm) => {
-        if (!searchTerm) return text;
-        
-        const parts = text.toString().split(new RegExp(`(${searchTerm})`, 'gi'));
-        return parts.map((part, index) => 
-            part.toLowerCase() === searchTerm.toLowerCase() 
-                ? <span key={index} className="highlight">{part}</span>
-                : part
-        );
-    };
+
 
     return (
         <>
             <div className="catalog-header">
-                <div className='catalog-title ctl'>Каталог продуктов  </div>
-                
-                <FontAwesomeIcon icon={faPlus} className="add" onClick={() => setIsAddingProduct(!isAddingProduct)}/>        
+                <div className='catalog-title ctl'>Каталог продуктов</div>
+                <div className="search-container">
+                    <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={handleSearch}
+                        placeholder="Поиск по ID"
+                        className="search-input"
+                    />
+                    {searchStatus === 'not-found' && (
+                            <div className="search-feedback">Ничего не найдено</div>
+                        )}
+                </div>
             </div>
-            <div className="search-container">
-                <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={handleSearch}
-                    placeholder="Поиск по ID или названию"
-                    className="search-input"
-                />
-                {searchStatus === 'not-found' && (
-                        <div className="search-feedback">Ничего не найдено</div>
-                    )}
-            </div>
+            <FontAwesomeIcon 
+                icon={faPlus}  
+                className={`btn-add ${isAddingProduct ? 'rotate' : ''}`} 
+                onClick={() => setIsAddingProduct(!isAddingProduct)}
+            /> 
+
             {isAddingProduct ? (
                 <form onSubmit={handleSubmit} className="add-product-form">
                     <input
@@ -258,8 +252,8 @@ const Catalog = () => {
                             <tbody>
                                 {filteredProducts.map((product) => (
                                     <tr key={product.id}>
-                                        <td>{highlightText(product.id.toString(), searchTerm)}</td>
-                                        <td>{highlightText(product.name, searchTerm)}</td>
+                                        <td>{product.id}</td>
+                                        <td>{product.name}</td>
                                         <td>{product.category}</td>
                                         <td>{product.description}</td>
                                         <td>{product.price}</td>
