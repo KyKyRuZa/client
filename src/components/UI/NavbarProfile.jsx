@@ -15,11 +15,14 @@ import {
 import { faBasketShopping } from '@fortawesome/free-solid-svg-icons'
 import '../../styles/global.css';
 import '../../styles/profile.css';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Navbar = ({ setActiveView, onCollapse }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -31,6 +34,7 @@ const Navbar = ({ setActiveView, onCollapse }) => {
   };
   const handleViewChange = (view) => {
     setActiveView(view);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -40,6 +44,9 @@ const Navbar = ({ setActiveView, onCollapse }) => {
           D
           {!isCollapsed && <span>DELRON</span>}
         </Link>
+        <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+        </div>
         <button 
           className="collapse-btn"
           onClick={handleCollapse}
@@ -49,7 +56,7 @@ const Navbar = ({ setActiveView, onCollapse }) => {
       </div>
 
 
-      <nav className="sidebar-nav">
+      <nav className={`sidebar-nav ${isMenuOpen ? 'active' : ''}`}>
         <div className="nav-header">
           {!isCollapsed && <span >Меню навигации</span>}
         </div>
@@ -89,7 +96,7 @@ const Navbar = ({ setActiveView, onCollapse }) => {
             </div>
       </nav>
 
-      <div className="sidebar-footer">
+      <div className={`sidebar-footer ${isMenuOpen ? 'active' : ''}`}>
         <button onClick={handleLogout} className="logout-btn">
         <FontAwesomeIcon icon={faRightFromBracket} size="lg"/>
           {!isCollapsed && <span>Выйти</span>}
