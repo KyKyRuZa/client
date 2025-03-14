@@ -55,6 +55,7 @@ const Catalog = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchStatus, setSearchStatus] = useState('');
     const [isAddingProduct, setIsAddingProduct] = useState(false);
+     const [editingProduct, setEditingProduct] = useState(null);
     const [newProduct, setNewProduct] = useState({
         name: '',
         description: '',
@@ -126,16 +127,17 @@ const Catalog = () => {
             console.error('Ошибка при удалении продукта:', error);
         }
     };
-    const handleEdit = async (productId) => {
-        try {
-            const productToEdit = await productService.editProduct(productId);
-            setNewProduct(productToEdit);
-            setIsAddingProduct(true);
-        } catch (error) {
-            console.error('Error loading product for edit:', error);
-        }
+    const handleEdit = (product) => {
+        setEditingProduct(product);
+        setNewProduct({
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            category: product.category,
+            image: null
+        });
+        setIsAddingProduct(true);
     };
-
     const handleSearch = (e) => {
         const term = e.target.value.toLowerCase();
         setSearchTerm(term);
@@ -399,29 +401,35 @@ const Basket = () => {
                 ) : (
                     <>
                         {basketItems.map((item) => (
-                            <div key={item.id} className="basket-item">
-                                <div className="basket-content">
-                                    <h3>{item?.Product?.name || 'Название отсутствует'}</h3>
-                                    <p>{item?.Product?.description || 'Описание отсутствует'}</p>
-                                    <div className="basket-quantity">
-                                        <button 
-                                            className="quantity-btn"
-                                            onClick={() => decrementQuantity(item.productId)}
-                                        >-</button>
-                                        <span>Количество: {item.quantity}</span>
-                                        <button 
-                                            className="quantity-btn"
-                                            onClick={() => incrementQuantity(item.productId)}
-                                        >+</button>
-                                    </div>
-                                    <p className='amount'>Цена: {item.totalAmount} ₽</p>
-                                </div>
-                                <div className="basket-actions">
-                                    <IconButton className="icon-button delete">
-                                    <FontAwesomeIcon icon={faTrash} onClick={() => removeFromCart(item.productId)} />
-                                    </IconButton>
-                                </div>
+                           <div key={item.id} className="basket-item">
+                           <div className="basket-content">
+                            <div className="basket-img-container">
+                               <img 
+                                   src={`${item.Product.imageUrl}`} 
+                                   className="basket-img"
+                               />
+                               <div className='basket-subtitle'>{item.Product.name}</div>
+                               <div className="basket-category">{item.Product.category}</div>
                             </div>
+                               <div className="basket-quantity">
+                                   <button 
+                                       className="quantity-btn"
+                                       onClick={() => decrementQuantity(item.productId)}
+                                   >-</button>
+                                   <span>Количество: {item.quantity}</span>
+                                   <button 
+                                       className="quantity-btn"
+                                       onClick={() => incrementQuantity(item.productId)}
+                                   >+</button>
+                               </div>
+                               <p className='amount'>Цена: {item.totalAmount} ₽</p>
+                           </div>
+                           <div className="basket-actions">
+                               <IconButton className="icon-button delete">
+                                   <FontAwesomeIcon icon={faTrash} onClick={() => removeFromCart(item.productId)} />
+                               </IconButton>
+                           </div>
+                       </div>
                         ))}
                         <div className="basket-total">
                             Итого: {basketItems.reduce((sum, item) => sum + item.totalAmount, 0)} ₽

@@ -11,6 +11,7 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Profile from './pages/Profile';
 import Catalog from './pages/Catalog';
+import ForgotPassword from './components/Auth/Forgot';
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard /> } />
           <Route path="/register" element={<Register />} /> 
           <Route path="/login" element={<Login />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/catalog" element={<Catalog />} />
         </Routes>

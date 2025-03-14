@@ -32,7 +32,11 @@ const authService = {
 
     getToken() {
         return localStorage.getItem('token');
-    }
+    },
+    async checkEmail(email) {
+        const response = await axios.get(`${API_URL}/${email}`);
+        return response.data;
+    },
 };
 
 export default authService;
