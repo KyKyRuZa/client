@@ -26,15 +26,18 @@ const productService = {
         return response.data;
     },
 
-    async editProduct(productId, productData) {
+    async updateProduct(productId, productData) {
         const formData = new FormData();
         formData.append('name', productData.name);
         formData.append('description', productData.description);
         formData.append('price', Math.floor(productData.price));
-        formData.append('image', productData.image);
         formData.append('category', productData.category);
+        
+        if (productData.image) {
+            formData.append('image', productData.image);
+        }
     
-        const response = await axios.put(`${API_URL}${productId}`, formData, {
+        const response = await axios.put(`${API_URL}/${productId}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -53,23 +56,17 @@ const productService = {
     },
 
     async incrementQuantity(userId, productId) {
-        const response = await axios.put(`${API_URL}/increment`, {
-            userId,
-            productId
-        });
+        const response = await axios.put(`${API_URL}/basket/increment`, {userId, productId});
         return response.data;
     },
-
+    
     async decrementQuantity(userId, productId) {
-        const response = await axios.put(`${API_URL}/decrement`, {
-            userId,
-            productId
-        });
+        const response = await axios.put(`${API_URL}/basket/decrement`, {userId, productId});
         return response.data;
     },
 
     async removeFromCart(userId, productId) {
-        await axios.delete(`${API_URL}/profile/${userId}/${productId}`);
+        await axios.delete(`${API_URL}/${userId}/${productId}`);
     }
 };
 

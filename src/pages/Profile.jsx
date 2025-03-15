@@ -55,7 +55,7 @@ const Catalog = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchStatus, setSearchStatus] = useState('');
     const [isAddingProduct, setIsAddingProduct] = useState(false);
-     const [editingProduct, setEditingProduct] = useState(null);
+    const [editingProduct, setEditingProduct] = useState(null);
     const [newProduct, setNewProduct] = useState({
         name: '',
         description: '',
@@ -76,7 +76,7 @@ const Catalog = () => {
             setProducts(productsData);
             setFilteredProducts(productsData);
         } catch (error) {
-            console.error('Error loading products:', error);
+            console.error('Ошибка прогрузки товаров:', error);
         }
     };
 
@@ -115,7 +115,7 @@ const Catalog = () => {
                 paymentStatus: 'unpaid'
             });
         } catch (error) {
-            console.error('Error saving product:', error);
+            console.error('Ошибка сохранения товара:', error);
         }
     };
 
@@ -130,6 +130,7 @@ const Catalog = () => {
     const handleEdit = (product) => {
         setEditingProduct(product);
         setNewProduct({
+            id: product.id,
             name: product.name,
             description: product.description,
             price: product.price,
@@ -183,7 +184,19 @@ const Catalog = () => {
             <FontAwesomeIcon 
                 icon={faPlus}  
                 className={`btn-add ${isAddingProduct ? 'rotate' : ''}`} 
-                onClick={() => setIsAddingProduct(!isAddingProduct)}
+                onClick={() => {
+                    setIsAddingProduct(!isAddingProduct);
+                    setEditingProduct(null);
+                    setNewProduct({
+                        name: '',
+                        description: '',
+                        price: '',
+                        image: null,
+                        category: '',
+                        status: 'active',
+                        paymentStatus: 'unpaid'
+                    });
+                }}
             /> 
 
             {isAddingProduct ? (
@@ -231,7 +244,9 @@ const Catalog = () => {
                         placeholder="Цена"
                         required
                     />
-                    <button type="submit" className='ctlbtn'>Сохранить товар</button>
+                    <button type="submit" className='ctlbtn'>
+                        {editingProduct ? 'Изменить товар' : 'Сохранить товар'}
+                    </button>
                 </form>
             ) : (
                 <div className="product-list">
@@ -258,7 +273,7 @@ const Catalog = () => {
                                         <td>{product.description}</td>
                                         <td>{product.price}</td>
                                         <td>
-                                            <IconButton className="icon-button edit" onClick={() => handleEdit(product.id)}>
+                                            <IconButton className="icon-button edit" onClick={() => handleEdit(product)}>
                                                 <FontAwesomeIcon icon={faEdit} />
                                             </IconButton>
                                             <IconButton className="icon-button delete" onClick={() => handleDelete(product.id)}>
@@ -334,49 +349,49 @@ const Basket = () => {
             fetchBasket();
         }
     }, [user]);
-
+    
     const incrementQuantity = async (productId) => {
         try {
-            const response = await productService.incrementQuantity(user.id, productId); // Используем сервис
+            const response = await productService.incrementQuantity(user.id, productId);
             if (response) {
-                setBasketItems(prevItems => 
-                    prevItems.map(item => 
-                        item.productId === productId 
+                setBasketItems(prevItems =>
+                    prevItems.map(item =>
+                        item.productId === productId
                         ? {
                             ...item,
                             quantity: response.quantity,
                             totalAmount: response.quantity * item.Product.price
-                        } 
+                        }
                         : item
                     )
                 );
             }
         } catch (error) {
-            console.error('Ошибка прибавления колличества:', error);
+            console.error('Error incrementing quantity:', error);
         }
     };
     
     const decrementQuantity = async (productId) => {
         try {
-            const response = await productService.decrementQuantity(user.id, productId); // Используем сервис
+            const response = await productService.decrementQuantity(user.id, productId);
             if (response) {
-                setBasketItems(prevItems => 
-                    prevItems.map(item => 
-                        item.productId === productId 
+                setBasketItems(prevItems =>
+                    prevItems.map(item =>
+                        item.productId === productId
                         ? {
                             ...item,
                             quantity: response.quantity,
                             totalAmount: response.quantity * item.Product.price
-                        } 
+                        }
                         : item
                     )
                 );
             }
         } catch (error) {
-            console.error('Ошибка вычитания колличества:', error);
+            console.error('Error decrementing quantity:', error);
         }
     };
-
+    
     const removeFromCart = async (productId) => {
         try {
             await productService.removeFromCart(user.id, productId); // Используем сервис
