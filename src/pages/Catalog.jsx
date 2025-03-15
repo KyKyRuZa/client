@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../components/Auth/Auth";
 import "../styles/dashboard.css";
 import "../styles/global.css";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import catalogService from '../api/catalog'; 
 import Navbar from "../components/UI/Navbar";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBasketShopping } from '@fortawesome/free-solid-svg-icons'
 const Catalog = () => {
   const { user } = useAuth();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [addedProducts, setAddedProducts] = useState(new Set());
   const [error, setError] = useState('');
-  const [imageError, setImageError] = useState({});
-
 
   const categories = [
     "Авто краски",
@@ -51,7 +51,7 @@ const Catalog = () => {
   const handleAddToBasket = async (productId) => {
     try {
         await catalogService.addToBasket(user.id, productId);
-        console.log('Успешно добавлено в корзину');
+        setAddedProducts(prev => new Set(prev).add(productId));
     } catch (error) {
         console.error('Ошибка добавления товара:', error);
     }
@@ -84,11 +84,8 @@ const Catalog = () => {
                 <div
                   className="catalog-img"
                   style={{
-                    backgroundImage: `url(${imageError[product.id] ? '../style/assets/default.png' : product.imageUrl})`,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover'
+                    backgroundImage: `url(${product.imageUrl})`,
                   }}
-                  onError={() => setImageError(prev => ({...prev, [product.id]: true}))}
                 ></div>
                 <div className="title-catalog">{product.name}</div>
                 <div className="subtitle-catalog">{product.description}</div>
@@ -98,8 +95,7 @@ const Catalog = () => {
                     className="add-to-cart-btn" 
                     onClick={() => handleAddToBasket(product.id)} 
                   >
-                    <ShoppingCartIcon />
-                    <span>Добавить в корзину</span>
+                    {addedProducts.has(product.id) ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faBasketShopping} size="lg"/>} 
                   </button>
                 </div>
                 

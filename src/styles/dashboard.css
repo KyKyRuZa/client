@@ -392,6 +392,7 @@ form button:hover {
       .nav-right.active {
         top: 0;
         z-index: 1;
+        margin-top: 100px;
       }
     
       .nav-right a {
