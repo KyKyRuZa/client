@@ -414,11 +414,10 @@ const Basket = () => {
                            <div className="basket-content">
                             <div className="basket-img-container">
                                <img 
-                                   src={`${item.Product.imageUrl}`} 
+                                   src={`${item.Product?.imageUrl}`} 
                                    className="basket-img"
                                />
-                               <div className='basket-subtitle'>{item.Product.name}</div>
-                               <div className="basket-category">{item.Product.category}</div>
+                               <div className='basket-subtitle'>{item.Product?.name}</div>
                             </div>
                                <div className="basket-quantity">
                                    <button 
