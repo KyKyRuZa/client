@@ -132,9 +132,6 @@
   cursor: pointer;
   z-index: 100;
 }
-
-
-
 .sidebar-nav.active {
   display: flex;
   flex-direction: column;

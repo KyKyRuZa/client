@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from "react-router-dom"
 import Navbar from '../components/UI/Navbar';
 import Footer from '../components/UI/Footer';
-import { ReactComponent as ForwardArrow }  from '../styles/assets/icons/arrow_forward.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Car }  from '../styles/assets/icons/car.svg';
 import '../styles/dashboard.css';
 import '../styles/global.css';
@@ -20,8 +21,9 @@ const DashBoard = () => {
               <Link to="/catalog" className='btn'> 
                 <p className='text'> 
                   Каталог 
-                  <ForwardArrow className="arw"/>
+                  <FontAwesomeIcon icon={faArrowRight} size='sm' className='arw'/>
                 </p> 
+                
               </Link>
             </div>
               <Car className='car'/>

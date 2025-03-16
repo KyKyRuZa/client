@@ -3,7 +3,7 @@ import { useAuth } from '../components/Auth/Auth';
 import Navbar from '../components/UI/NavbarProfile';
 import productService from '../api/product'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faPlus,faTimes  } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faPlus  } from '@fortawesome/free-solid-svg-icons';
 import { IconButton } from '@mui/material';
 
 import '../styles/main.css';
@@ -348,8 +348,9 @@ const Basket = () => {
         if (user && user.id) {
             fetchBasket();
         }
+        
     }, [user]);
-    
+
     const incrementQuantity = async (productId) => {
         try {
             const response = await productService.incrementQuantity(user.id, productId);
@@ -411,36 +412,37 @@ const Basket = () => {
                     <>
                         {basketItems.map((item) => (
                            <div key={item.id} className="basket-item">
-                           <div className="basket-content">
-                            <div className="basket-img-container">
-                               <img 
-                                   src={`${item.Product?.imageUrl}`} 
-                                   className="basket-img"
-                               />
-                               <div className='basket-subtitle'>{item.Product?.name}</div>
-                            </div>
-                               <div className="basket-quantity">
-                                   <button 
-                                       className="quantity-btn"
-                                       onClick={() => decrementQuantity(item.productId)}
-                                   >-</button>
-                                   <span>Количество: {item.quantity}</span>
-                                   <button 
-                                       className="quantity-btn"
-                                       onClick={() => incrementQuantity(item.productId)}
-                                   >+</button>
-                               </div>
-                               <p className='amount'>Цена: {item.totalAmount} ₽</p>
-                           </div>
                            <div className="basket-actions">
                                <IconButton className="icon-button delete">
                                    <FontAwesomeIcon icon={faTrash} onClick={() => removeFromCart(item.productId)} />
                                </IconButton>
                            </div>
+                           <div className="basket-content">
+                               <div className="basket-img-container">
+                                   <img 
+                                       src={`${item.Product?.imageUrl}`} 
+                                       className="basket-img"
+                                   />
+                                   <div className='basket-subtitle'>{item.Product?.name}</div>
+                               </div>
+                               <div className="basket-quantity">
+                                   <button 
+                                       className="quantity-btn"
+                                       onClick={() => decrementQuantity(item.productId)}
+                                   >-</button>
+                                   <span>{item.quantity}</span>
+                                   <button 
+                                       className="quantity-btn"
+                                       onClick={() => incrementQuantity(item.productId)}
+                                   >+</button>
+                               </div>
+                           </div>
+                           <p className='basket-amount'>{item.totalAmount} ₽</p>
                        </div>
                         ))}
-                        <div className="basket-total">
-                            Итого: {basketItems.reduce((sum, item) => sum + item.totalAmount, 0)} ₽
+                        <div className='basket-total-container'>
+                            <button className="buy">Оплатить</button>
+                            <div className="basket-total">Итого: {basketItems.reduce((sum, item) => sum + item.totalAmount, 0)} ₽</div>
                         </div>
                     </>
                 )}

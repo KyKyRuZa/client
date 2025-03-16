@@ -91,14 +91,13 @@ const Catalog = () => {
                 <div className="subtitle-catalog">{product.description}</div>
                 <div className="catalog-price-container">
                   <div className="catalog-price">{product.price} ₽</div>
-                  <button 
-                    className="add-to-cart-btn" 
-                    onClick={() => handleAddToBasket(product.id)} 
-                  >
-                    {addedProducts.has(product.id) ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faBasketShopping} size="lg"/>} 
-                  </button>
+                  <div className="btn-container">
+                    <button className="add-to-cart-btn">Купить</button>
+                    <button className="add-to-cart-btn" onClick={() => handleAddToBasket(product.id)} >
+                      {addedProducts.has(product.id) ? <FontAwesomeIcon icon={faCheck} size="lg"/> : <FontAwesomeIcon icon={faBasketShopping} size="lg"/>} 
+                    </button>
+                  </div>
                 </div>
-                
               </div>
             ))}
           </div>
