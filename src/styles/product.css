@@ -89,3 +89,47 @@
     cursor: pointer;
     width: 45px;
 }
+@media (max-width: 425px) {
+    .product-page {
+        padding: 30px 20px;
+    }
+
+    .product-container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .product-image-container {
+        flex: none;
+    }
+
+    .product-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product-title {
+        font-size: 24px;
+    }
+
+    .product-category {
+        font-size: 16px;
+    }
+
+    .product-description {
+        font-size: 14px;
+    }
+
+    .product-price {
+        font-size: 20px;
+    }
+
+    .product-buttons {
+        width: 100%;
+    }
+
+    .buy-button {
+        flex: 1;
+    }
+}
