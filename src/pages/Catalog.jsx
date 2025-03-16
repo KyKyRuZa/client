@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link,useNavigate } from "react-router-dom"
 import { useAuth } from "../components/Auth/Auth";
 import "../styles/dashboard.css";
 import "../styles/global.css";
@@ -7,7 +8,11 @@ import catalogService from '../api/catalog';
 import Navbar from "../components/UI/Navbar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBasketShopping } from '@fortawesome/free-solid-svg-icons'
+
+
+
 const Catalog = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -49,6 +54,10 @@ const Catalog = () => {
   }, [selectedCategory, products]);
 
   const handleAddToBasket = async (productId) => {
+      if (!user) {
+        navigate('/login');
+        return;
+    }
     try {
         await catalogService.addToBasket(user.id, productId);
         setAddedProducts(prev => new Set(prev).add(productId));
@@ -80,20 +89,20 @@ const Catalog = () => {
         ) : (
           <div className="catalog-grid">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="card-catalog ">
+              <div key={product.id} className="catalog-card ">
                 <div
                   className="catalog-img"
                   style={{
                     backgroundImage: `url(${product.imageUrl})`,
                   }}
                 ></div>
-                <div className="title-catalog">{product.name}</div>
-                <div className="subtitle-catalog">{product.description}</div>
+                <Link to={`/product/${product.id}`} className="catalog-title">{product.name}</Link>
+                <div className="catalog-subtitle">{product.description}</div>
                 <div className="catalog-price-container">
                   <div className="catalog-price">{product.price} ₽</div>
                   <div className="btn-container">
-                    <button className="add-to-cart-btn">Купить</button>
-                    <button className="add-to-cart-btn" onClick={() => handleAddToBasket(product.id)} >
+                    <button className="buy-button">Купить</button>
+                    <button className="basket-button" onClick={() => handleAddToBasket(product.id)} >
                       {addedProducts.has(product.id) ? <FontAwesomeIcon icon={faCheck} size="lg"/> : <FontAwesomeIcon icon={faBasketShopping} size="lg"/>} 
                     </button>
                   </div>

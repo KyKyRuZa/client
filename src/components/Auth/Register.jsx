@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './Auth';
 import '../../styles/auth.css'
-import { ReactComponent as BackArrow }  from '../../styles/assets/icons/arrow_back.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
 
 const Register = () => {
     const [open, setOpen] = useState(false);
@@ -59,7 +61,7 @@ const Register = () => {
     return (
         <div className="auth-container">
             <div className="auth-form">
-                <BackArrow className="back-arrow" onClick={() => navigate('/')} />
+            <FontAwesomeIcon icon={faArrowLeft} onClick={() => navigate('/')} className='back-icon' />
                 <div className="auth-header">
                     <p>Создать аккаунт</p>
                 </div>
@@ -127,18 +129,18 @@ const Register = () => {
                     />
                     {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
                 </div>
-                    <div className="form-group checkbox-group">
-                        <label className="checkbox-label">
-                            <input
-                                type="checkbox"
-                                checked={accepted}
-                                onChange={handleAcceptTerms}
-                            />
-                            <span>
-                                Я принимаю{' '} <Link to="/terms">пользовательское соглашение</Link>
-                            </span>
-                        </label>
-                    </div>
+                <div className="form-group checkbox-group">
+                    <label className="checkbox-label">
+                        <input
+                            type="checkbox"
+                            checked={accepted}
+                            onChange={handleAcceptTerms}
+                        />
+                        <span>
+                            Я принимаю{' '} <Link to="/terms">пользовательское соглашение</Link>
+                        </span>
+                    </label>
+                </div>
                     {errors.terms && <div className="error-message">{errors.terms}</div>}
                     <button type="submit" className="auth-button">
                         Зарегистрироваться

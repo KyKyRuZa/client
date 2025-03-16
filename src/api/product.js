@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://delron.ru/api/profile';
+const API_URL = 'http://localhost:5000/api/profile';
 
 const productService = {
     // Операции с продуктом
@@ -16,6 +16,7 @@ const productService = {
         formData.append('price', Math.floor(productData.price));
         formData.append('image', productData.image);
         formData.append('category', productData.category);
+        formData.append('quantity', productData.quantity);
 
     
         const response = await axios.post(API_URL, formData, {
@@ -32,10 +33,8 @@ const productService = {
         formData.append('description', productData.description);
         formData.append('price', Math.floor(productData.price));
         formData.append('category', productData.category);
-        
-        if (productData.image) {
-            formData.append('image', productData.image);
-        }
+        formData.append('quantity', productData.quantity);
+        formData.append('image', productData.image);
     
         const response = await axios.put(`${API_URL}/${productId}`, formData, {
             headers: {
@@ -55,6 +54,7 @@ const productService = {
         return response.data;
     },
 
+    // Add these methods inside productService
     async incrementQuantity(userId, productId) {
         const response = await axios.put(`${API_URL}/basket/increment`, {userId, productId});
         return response.data;
@@ -64,6 +64,7 @@ const productService = {
         const response = await axios.put(`${API_URL}/basket/decrement`, {userId, productId});
         return response.data;
     },
+
 
     async removeFromCart(userId, productId) {
         await axios.delete(`${API_URL}/${userId}/${productId}`);

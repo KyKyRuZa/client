@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './Auth';
 import '../../styles/auth.css'
 import '../../styles/global.css'
-import { ReactComponent as BackArrow }  from '../../styles/assets/icons/arrow_back.svg';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 const Login = () => {
@@ -35,7 +35,7 @@ const Login = () => {
             await login(formData);
             setMessage('Успешный вход!');
             setSeverity('success');
-            navigate('/profile');
+            navigate(`/profile`);
         } catch (err) {
             if (err.response?.data?.errors) {
                 setErrors(err.response.data.errors);
@@ -52,7 +52,7 @@ const Login = () => {
     return (
         <div className="auth-container">
             <div className="auth-form">
-                <BackArrow className="back-arrow" onClick={() => navigate('/')} />
+            <FontAwesomeIcon icon={faArrowLeft} onClick={() => navigate('/')} className='back-icon' />
                 <div className="auth-header">
                     <p>Войти в аккаунт</p>
                 </div>

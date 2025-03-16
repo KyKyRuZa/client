@@ -61,6 +61,7 @@ const Catalog = () => {
         description: '',
         price: '',
         img: null,
+        quantity: '',
         category: '',
         status: 'active',
         paymentStatus: 'unpaid'
@@ -111,6 +112,7 @@ const Catalog = () => {
                 price: '',
                 img: null,
                 category: '',
+                quantity: '',
                 status: 'active',
                 paymentStatus: 'unpaid'
             });
@@ -134,6 +136,7 @@ const Catalog = () => {
             name: product.name,
             description: product.description,
             price: product.price,
+            quantity: product.quantity,
             category: product.category,
             image: null
         });
@@ -192,6 +195,7 @@ const Catalog = () => {
                         description: '',
                         price: '',
                         image: null,
+                        quantity: '',
                         category: '',
                         status: 'active',
                         paymentStatus: 'unpaid'
@@ -238,6 +242,14 @@ const Catalog = () => {
                     />
                     <input
                         type="number"
+                        name="quantity"
+                        value={newProduct.quantity}
+                        onChange={handleInputChange}
+                        placeholder="Количество"
+                        required
+                    />
+                    <input
+                        type="number"
                         name="price"
                         value={newProduct.price}
                         onChange={handleInputChange}
@@ -260,6 +272,7 @@ const Catalog = () => {
                                     <th>Название</th>
                                     <th>Категория</th>
                                     <th>Описание</th>
+                                    <th>Количество</th>
                                     <th>Цена (₽)</th>
                                     <th>Действия</th>
                                 </tr>
@@ -271,6 +284,7 @@ const Catalog = () => {
                                         <td>{product.name}</td>
                                         <td>{product.category}</td>
                                         <td>{product.description}</td>
+                                        <td>{product.quantity}</td>
                                         <td>{product.price}</td>
                                         <td>
                                             <IconButton className="icon-button edit" onClick={() => handleEdit(product)}>

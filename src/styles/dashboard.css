@@ -174,7 +174,7 @@
     justify-content: space-between;
     align-items: center;
 }
-.card-catalog {
+.catalog-card {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -191,12 +191,13 @@
     background-position: center; 
     border-radius: 18px;
 }
-.title-catalog{
+.catalog-title{
+    text-decoration: none;
     font-size: 24px;
     font-weight: 700;
     color: #000000;
 }
-.subtitle-catalog{
+.catalog-subtitle{
     font-size: 14px;
     font-weight: 400;
     color: #000000;
@@ -230,21 +231,23 @@
     font-weight: 700;
     color: #000000;
 }
-.add-to-cart-btn{
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-    background-color: #FFC60C;
+.buy-button {
+    background: #FFC60C;
     color: black;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 700;
     border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: bold;
     cursor: pointer;
-    padding: 10px 15px; 
 }
-.add-to-cart-btn span {
-    margin-left: 8px; 
+.basket-button {
+    background: none;
+    color: black ;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 45px;
 }
 .category-select {
     width: 200px;
@@ -348,6 +351,9 @@ form button:hover {
     background-color: #0056b3; 
 }
 
+
+
+
 @media screen and (min-width: 426px) {
     .hamburger {
       display: none;
@@ -418,7 +424,7 @@ form button:hover {
         padding: 40px 10px;
     }
     
-    .card-catalog {
+    .catalog-card {
         max-width: 100%;
         padding: 12px;
       }

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../api/auth';
-import axios from 'axios';
 import '../../styles/auth.css';
-import { ReactComponent as BackArrow } from '../../styles/assets/icons/arrow_back.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
@@ -42,7 +42,8 @@ const ForgotPassword = () => {
     return (
         <div className="auth-container">
             <div className="auth-form">
-                <BackArrow className="back-arrow" onClick={() => navigate('/login')} />
+                           <FontAwesomeIcon icon={faArrowLeft} onClick={() => navigate(-1)} className='back-icon' />
+               
                 <div className="auth-header">
                     <p>Восстановление пароля</p>
                 </div>
