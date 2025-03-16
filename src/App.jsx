@@ -11,6 +11,7 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Profile from './pages/Profile';
 import Catalog from './pages/Catalog';
+import Product from './pages/Product';
 import ForgotPassword from './components/Auth/Forgot';
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/catalog" element={<Catalog />} />
+          <Route path="/product/:id" element={<Product />} />
         </Routes>
       </Router>
    </AuthProvider>
