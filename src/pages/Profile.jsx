@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../components/Auth/Auth';
 import Navbar from '../components/UI/NavbarProfile';
 import productService from '../api/product'; 
+import profileService from '../api/profile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faPlus  } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faPlus, faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
 import { IconButton } from '@mui/material';
 
 import '../styles/main.css';
@@ -80,7 +81,9 @@ const Catalog = () => {
             console.error('Ошибка прогрузки товаров:', error);
         }
     };
-
+    const handleProductUpdate = async () => {
+        await loadProducts(); 
+    };
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewProduct(prev => ({
@@ -105,6 +108,7 @@ const Catalog = () => {
                 await productService.addProduct(newProduct);
             }
             loadProducts();
+            await handleProductUpdate();
             setIsAddingProduct(false);
             setNewProduct({
                 name: '',
@@ -124,7 +128,8 @@ const Catalog = () => {
     const handleDelete = async (productId) => {
         try {
             await productService.deleteProduct(productId); 
-            setProducts(products.filter(product => product.id !== productId));
+            await handleProductUpdate();
+            
         } catch (error) {
             console.error('Ошибка при удалении продукта:', error);
         }
@@ -364,22 +369,25 @@ const Basket = () => {
         }
         
     }, [user]);
+    
+    const refreshBasket = async () => {
+        try {
+            const basketData = await productService.fetchBasket(user.id);
+            setBasketItems(basketData);
+        } catch (error) {
+            console.error('Error fetching basket:', error);
+        }
+    };
+
+    const handleBasketUpdate = async () => {
+        await refreshBasket(); 
+    };
 
     const incrementQuantity = async (productId) => {
         try {
             const response = await productService.incrementQuantity(user.id, productId);
             if (response) {
-                setBasketItems(prevItems =>
-                    prevItems.map(item =>
-                        item.productId === productId
-                        ? {
-                            ...item,
-                            quantity: response.quantity,
-                            totalAmount: response.quantity * item.Product.price
-                        }
-                        : item
-                    )
-                );
+                await handleBasketUpdate(); 
             }
         } catch (error) {
             console.error('Error incrementing quantity:', error);
@@ -390,17 +398,7 @@ const Basket = () => {
         try {
             const response = await productService.decrementQuantity(user.id, productId);
             if (response) {
-                setBasketItems(prevItems =>
-                    prevItems.map(item =>
-                        item.productId === productId
-                        ? {
-                            ...item,
-                            quantity: response.quantity,
-                            totalAmount: response.quantity * item.Product.price
-                        }
-                        : item
-                    )
-                );
+                await handleBasketUpdate(); 
             }
         } catch (error) {
             console.error('Error decrementing quantity:', error);
@@ -411,6 +409,7 @@ const Basket = () => {
         try {
             await productService.removeFromCart(user.id, productId); // Используем сервис
             setBasketItems(basketItems.filter(item => item.productId !== productId));
+            await handleBasketUpdate();
         } catch (error) {
             console.error('Error removing from cart:', error);
         }
@@ -503,10 +502,159 @@ const Sells = () => {
     );
 };
 
+const Settings = () => {
+    const { user } = useAuth();
+    const [formData, setFormData] = useState({
+        firstName: user?.firstName || '',
+        lastName: user?.lastName || '',
+        email: user?.email || '',
+        phone: user?.phone || '',
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+    });
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            if (formData.currentPassword && formData.newPassword) {
+                await profileService.updatePassword(user.id, {
+                    currentPassword: formData.currentPassword,
+                    newPassword: formData.newPassword,
+                    confirmPassword: formData.confirmPassword
+                });
+            }
+    
+            const response = await profileService.updatePersonalInfo(user.id, {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                phone: formData.phone
+            });
+    
+            const currentUser = JSON.parse(localStorage.getItem('user'));
+            const updatedUser = { ...currentUser, ...response.data.user };
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+    
+            window.location.reload();
+    
+        } catch (error) {
+            console.error('Error updating settings:', error);
+        }
+    };
+    
+
+    return (
+        <div className="settings-container">
+            <div className="settings-title">Настройки профиля</div>
+            <form onSubmit={handleSubmit} className="settings-form">
+                <div className="settings-section">
+                    <h3>Личные данные</h3>
+                    <div className="form-group">
+                        <label>Имя</label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Фамилия</label>
+                        <input
+                            type="text"
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Телефон</label>
+                        <input
+                            type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
+
+                <div className="settings-section">
+                <h3>Изменить пароль</h3>
+                <div className="form-group">
+                    <label>Текущий пароль</label>
+                    <div className="password-input-container">
+                        <input
+                            type={showCurrentPassword ? "text" : "password"}
+                            name="currentPassword"
+                            value={formData.currentPassword}
+                            onChange={handleChange}
+                        />
+                        <FontAwesomeIcon 
+                            icon={showCurrentPassword ? faEyeSlash : faEye}
+                            onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                            className="password-setting-toggle-icon"
+                        />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label>Новый пароль</label>
+                    <div className="password-input-container">
+                        <input
+                            type={showNewPassword ? "text" : "password"}
+                            name="newPassword"
+                            value={formData.newPassword}
+                            onChange={handleChange}
+                        />
+                        <FontAwesomeIcon 
+                            icon={showNewPassword ? faEyeSlash : faEye}
+                            onClick={() => setShowNewPassword(!showNewPassword)}
+                            className="password-setting-toggle-icon"
+                        />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label>Подтвердите новый пароль</label>
+                    <div className="password-input-container">
+                        <input
+                            type={showConfirmPassword ? "text" : "password"}
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                        />
+                        <FontAwesomeIcon 
+                            icon={showConfirmPassword ? faEyeSlash : faEye}
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            className="password-setting-toggle-icon"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" className="settings-save-btn">
+                Сохранить изменения
+            </button>
+            </form>
+        </div>
+    );
+};
+
+
 const Profile = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const { user } = useAuth();
     const [activeView, setActiveView] = useState('profile');
+
+   
 
     const renderContent = () => {
         switch(activeView) {
@@ -520,6 +668,8 @@ const Profile = () => {
                 return <Sells />;
             case 'orders':
                 return <Orders/>;
+            case 'settings':
+                return <Settings />;
             default:
                 return null;
         }

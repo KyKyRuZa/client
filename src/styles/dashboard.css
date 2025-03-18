@@ -351,7 +351,9 @@ form button:hover {
     background-color: #0056b3; 
 }
 
-
+.hamburger{
+    color: white;
+}
 
 
 @media screen and (min-width: 426px) {
@@ -378,10 +380,14 @@ form button:hover {
         height: 20px;
     }
     .hamburger {
-        display: flex;
+        position: fixed;
+        top: 18px;
+        right: 20px;
         cursor: pointer;
         z-index: 100;
-      }
+        color: white;
+        font-size: 24px;
+    }
     
       .nav-right {
         display: flex;
@@ -411,6 +417,7 @@ form button:hover {
       }
       .nav-left{
         z-index: 2;
+        display: block;
       }
     .reg-btn {
         height: 45px;

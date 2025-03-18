@@ -41,8 +41,8 @@ const Navbar = ({ setActiveView, onCollapse }) => {
     <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
         <Link className="brand" to="/">
-          D
-          {!isCollapsed && <span>DELRON</span>}
+          <span className='mini'>D</span>
+          {!isCollapsed && <span className='full'>Delron</span>}
         </Link>
         <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <CloseIcon /> : <MenuIcon />}

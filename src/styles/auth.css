@@ -142,7 +142,27 @@
     color: #2563EB;
 }
 
+.password-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
+.password-toggle-icon {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    color: #666;
+}
+.password-setting-toggle-icon {
+    position: absolute;
+    right: 900px;
+    cursor: pointer;
+    color: #666;
+}
+.password-toggle-icon:hover {
+    color: #333;
+}
 .auth-form .message {
     text-align: center;
     margin: 20px 0;
@@ -162,20 +182,47 @@
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+@media screen and (max-width: 425px) {
+    .auth-form {
+        padding: 20px;
+        max-width: 300px;
+        margin: 0 15px;
+    }
 
-.password-input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
+    .auth-header p {
+        font-size: 22px;
+    }
 
-.password-toggle-icon {
-    position: absolute;
-    right: 20px;
-    cursor: pointer;
-    color: #666;
-}
+    .form-group input {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
 
-.password-toggle-icon:hover {
-    color: #333;
+    .auth-button {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .auth-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .auth-links p {
+        margin: 8px 0;
+        font-size: 13px;
+    }
+
+    .checkbox-label {
+        font-size: 13px;
+    }
+
+    .password-toggle-icon {
+        right: 20px;
+    }
+    .password-setting-toggle-icon {
+        right: 20px;
+    }
 }

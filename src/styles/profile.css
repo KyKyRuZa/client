@@ -38,7 +38,7 @@
   align-items: center;
   gap: 16px; 
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   color: #fff;
 }
@@ -184,6 +184,12 @@
     padding: 15px 20px;
     font-size: 18px;
 
+  }
+  .mini{
+    display: none;
+  }
+  .full{
+    margin: 0 14px;
   }
   .brand {
     font-size: 20px;
