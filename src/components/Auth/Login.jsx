@@ -4,10 +4,12 @@ import { useAuth } from './Auth';
 import '../../styles/auth.css'
 import '../../styles/global.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const Login = () => {
+    const [showPassword, setShowPassword] = useState(false);
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState('');
     const [severity, setSeverity] = useState('success');
@@ -73,14 +75,21 @@ const Login = () => {
 
                     <div className="form-group">
                         <label htmlFor="password">Пароль</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
+                        <div className="password-input-container">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
+                            <FontAwesomeIcon 
+                                icon={showPassword ? faEyeSlash : faEye}
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="password-toggle-icon"
+                            />
+                        </div>
                     </div>
                     {errors.email && <div className="error-message">{errors.email}</div>}
 

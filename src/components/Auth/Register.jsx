@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './Auth';
 import '../../styles/auth.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft,faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 
 const Register = () => {
@@ -12,6 +12,8 @@ const Register = () => {
     const [severity, setSeverity] = useState('success');
     const navigate = useNavigate();
     const { register } = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -105,28 +107,42 @@ const Register = () => {
 
                 <div className="form-group">
                     <label htmlFor="password">Пароль</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                        minLength="6"
-                    />
+                    <div className="password-input-container">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                            minLength="6"
+                        />
+                        <FontAwesomeIcon 
+                            icon={showPassword ? faEyeSlash : faEye}
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="password-toggle-icon"
+                        />
+                    </div>
                     {errors.password && <div className="error-message">{errors.password}</div>}
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="confirmPassword">Подтвердите пароль</label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        required
-                    />
+                    <div className="password-input-container">
+                        <input
+                            type={showConfirmPassword ? "text" : "password"}
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            required
+                        />
+                        <FontAwesomeIcon 
+                            icon={showConfirmPassword ? faEyeSlash : faEye}
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            className="password-toggle-icon"
+                        />
+                    </div>
                     {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
                 </div>
                 <div className="form-group checkbox-group">
