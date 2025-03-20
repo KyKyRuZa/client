@@ -13,7 +13,7 @@ import Profile from './pages/Profile';
 import Catalog from './pages/Catalog';
 import Product from './pages/Product';
 import ForgotPassword from './components/Auth/Forgot';
-
+import ResetPassword from './components/Auth/Reset';
 
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
           <Route path="/register" element={<Register />} /> 
           <Route path="/login" element={<Login />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/product/:id" element={<Product />} />

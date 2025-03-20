@@ -20,7 +20,18 @@ const authService = {
         }
         return response.data;
     },
+    checkEmail(email) {
+        return axios.post(`${API_URL}/check-email`, { email });
+    },
+    
+    sendResetEmail(email) {
+        return axios.post(`${API_URL}/forgot-password`, { email });
+    },
 
+    resetPassword(token, newPassword) {
+        return axios.post(`${API_URL}/reset-password`, { token, newPassword });
+    },
+    
     logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -33,10 +44,8 @@ const authService = {
     getToken() {
         return localStorage.getItem('token');
     },
-    async checkEmail(email) {
-        const response = await axios.get(`${API_URL}/${email}`);
-        return response.data;
-    },
+    
+
 };
 
 export default authService;
