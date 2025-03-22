@@ -90,12 +90,12 @@ const Catalog = () => {
           <div className="catalog-grid">
             {filteredProducts.map((product) => (
               <div key={product.id} className="catalog-card ">
-                <div
+                <Link to={`/product/${product.id}`}
                   className="catalog-img"
                   style={{
                     backgroundImage: `url(${product.imageUrl})`,
                   }}
-                ></div>
+                ></Link>
                 <Link to={`/product/${product.id}`} className="catalog-title">{product.name}</Link>
                 <div className="catalog-subtitle">{product.description}</div>
                 <div className="catalog-price-container">
