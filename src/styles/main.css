@@ -255,7 +255,6 @@ font-size: 14px;
 margin-top: 5px;
 }
 
-
 .basket-quantity {
 display: flex;
 align-items: center;
@@ -323,6 +322,56 @@ margin: 10px;
 font-size: 16px;
 color: #d1d1d1;
 }
+/* Настройки */
+
+
+
+.settings-title {
+font-size: 24px;
+font-weight: 600;
+margin-bottom: 30px;
+color: #fff;
+}
+
+.settings-forms-container {
+display: flex;
+gap: 60px;
+margin-bottom: 30px;
+}
+
+.settings-form {
+flex: 1;
+}
+
+.settings-section h3 {
+font-size: 18px;
+color: #fff;
+margin-bottom: 20px;
+}
+
+.button-row {
+display: flex;
+gap: 20px;
+justify-content: center;
+}
+
+.settings-save-btn {
+padding: 12px 24px;
+background: #007bff;
+color: white;
+border: none;
+border-radius: 6px;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.settings-save-btn:hover {
+background: #0056b3;
+}
+
+
 
 
 @media (max-width: 425px) {
@@ -490,4 +539,35 @@ color: #d1d1d1;
 .basket-total {
     text-align: right;
 }
+
+/* Настройки */
+.settings-container {
+  padding: 15px;
+}
+
+.settings-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.settings-forms-container {
+  flex-direction: column;
+  gap: 15px;
+}
+
+.settings-form {
+  padding: 15px;
+}
+
+.settings-section h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.settings-save-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 13px;
+}
+
 }

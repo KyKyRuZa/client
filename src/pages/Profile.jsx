@@ -524,130 +524,148 @@ const Settings = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handlePersonalInfoSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (formData.currentPassword && formData.newPassword) {
-                await profileService.updatePassword(user.id, {
-                    currentPassword: formData.currentPassword,
-                    newPassword: formData.newPassword,
-                    confirmPassword: formData.confirmPassword
-                });
-            }
-    
             const response = await profileService.updatePersonalInfo(user.id, {
                 firstName: formData.firstName,
                 lastName: formData.lastName,
                 phone: formData.phone
             });
-    
+
             const currentUser = JSON.parse(localStorage.getItem('user'));
             const updatedUser = { ...currentUser, ...response.data.user };
             localStorage.setItem('user', JSON.stringify(updatedUser));
-    
             window.location.reload();
-    
         } catch (error) {
-            console.error('Error updating settings:', error);
+            console.error('Error updating personal info:', error);
         }
     };
-    
+
+    const handlePasswordSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await profileService.updatePassword(user.id, {
+                currentPassword: formData.currentPassword,
+                newPassword: formData.newPassword,
+                confirmPassword: formData.confirmPassword
+            });
+            
+            setFormData(prev => ({
+                ...prev,
+                currentPassword: '',
+                newPassword: '',
+                confirmPassword: ''
+            }));
+            
+            window.location.reload();
+        } catch (error) {
+            console.error('Error updating password:', error);
+        }
+    };
 
     return (
         <div className="settings-container">
             <div className="settings-title">Настройки профиля</div>
-            <form onSubmit={handleSubmit} className="settings-form">
-                <div className="settings-section">
-                    <h3>Личные данные</h3>
-                    <div className="form-group">
-                        <label>Имя</label>
-                        <input
-                            type="text"
-                            name="firstName"
-                            value={formData.firstName}
-                            onChange={handleChange}
-                        />
+            <div className="settings-forms-container">
+                <form onSubmit={handlePersonalInfoSubmit} className="settings-form">
+                    <div className="settings-section">
+                        <h3>Личные данные</h3>
+                        <div className="form-group">
+                            <label>Имя</label>
+                            <input
+                                type="text"
+                                name="firstName"
+                                value={formData.firstName}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Фамилия</label>
+                            <input
+                                type="text"
+                                name="lastName"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Телефон</label>
+                            <input
+                                type="tel"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        
                     </div>
-                    <div className="form-group">
-                        <label>Фамилия</label>
-                        <input
-                            type="text"
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Телефон</label>
-                        <input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                        />
-                    </div>
-                </div>
+                <button onClick={handlePersonalInfoSubmit} className="settings-save-btn">
+                    Сохранить личные данные
+                </button>
+                </form>
 
-                <div className="settings-section">
-                <h3>Изменить пароль</h3>
-                <div className="form-group">
-                    <label>Текущий пароль</label>
-                    <div className="password-input-container">
-                        <input
-                            type={showCurrentPassword ? "text" : "password"}
-                            name="currentPassword"
-                            value={formData.currentPassword}
-                            onChange={handleChange}
-                        />
-                        <FontAwesomeIcon 
-                            icon={showCurrentPassword ? faEyeSlash : faEye}
-                            onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                            className="password-setting-toggle-icon"
-                        />
+                <form onSubmit={handlePasswordSubmit} className="settings-form">
+                    <div className="settings-section">
+                        <h3>Изменить пароль</h3>
+                        <div className="form-group">
+                            <label>Текущий пароль</label>
+                            <div className="password-input-container">
+                                <input
+                                    type={showCurrentPassword ? "text" : "password"}
+                                    name="currentPassword"
+                                    value={formData.currentPassword}
+                                    onChange={handleChange}
+                                />
+                                <FontAwesomeIcon 
+                                    icon={showCurrentPassword ? faEyeSlash : faEye}
+                                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                                    className="password-setting-toggle-icon"
+                                />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label>Новый пароль</label>
+                            <div className="password-input-container">
+                                <input
+                                    type={showNewPassword ? "text" : "password"}
+                                    name="newPassword"
+                                    value={formData.newPassword}
+                                    onChange={handleChange}
+                                />
+                                <FontAwesomeIcon 
+                                    icon={showNewPassword ? faEyeSlash : faEye}
+                                    onClick={() => setShowNewPassword(!showNewPassword)}
+                                    className="password-setting-toggle-icon"
+                                />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label>Подтвердите новый пароль</label>
+                            <div className="password-input-container">
+                                <input
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    name="confirmPassword"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                />
+                                <FontAwesomeIcon 
+                                    icon={showConfirmPassword ? faEyeSlash : faEye}
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    className="password-setting-toggle-icon"
+                                />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className="form-group">
-                    <label>Новый пароль</label>
-                    <div className="password-input-container">
-                        <input
-                            type={showNewPassword ? "text" : "password"}
-                            name="newPassword"
-                            value={formData.newPassword}
-                            onChange={handleChange}
-                        />
-                        <FontAwesomeIcon 
-                            icon={showNewPassword ? faEyeSlash : faEye}
-                            onClick={() => setShowNewPassword(!showNewPassword)}
-                            className="password-setting-toggle-icon"
-                        />
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label>Подтвердите новый пароль</label>
-                    <div className="password-input-container">
-                        <input
-                            type={showConfirmPassword ? "text" : "password"}
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                        />
-                        <FontAwesomeIcon 
-                            icon={showConfirmPassword ? faEyeSlash : faEye}
-                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                            className="password-setting-toggle-icon"
-                        />
-                    </div>
-                </div>
+                <button onClick={handlePasswordSubmit} className="settings-save-btn">
+                    Обновить пароль
+                </button>
+                </form>
             </div>
-
-            <button type="submit" className="settings-save-btn">
-                Сохранить изменения
-            </button>
-            </form>
         </div>
+
     );
 };
-
 
 const Profile = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
