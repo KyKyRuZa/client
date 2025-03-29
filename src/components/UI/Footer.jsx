@@ -12,8 +12,8 @@ const Footer = () => {
           <div className="footer-right">
             <ul className='footer-links'>
               <li>Пользовательское соглашение</li>
-              <li>лец 1</li>
-              <li>лец 2</li>
+              <li>Политика конфиденциальности</li>
+              <li>Оферта</li>
             </ul>
           </div>
         </div>

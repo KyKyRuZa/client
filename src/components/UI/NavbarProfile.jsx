@@ -65,7 +65,7 @@ const Navbar = ({ setActiveView, onCollapse }) => {
           {!isCollapsed && <span>Профиль</span>}
         </div>
 
-        {user?.role === 'администратор' && (
+        {user?.role === 'admin' && (
           <div className="nav-item" onClick={() => handleViewChange('admin-catalog')}>
             <FontAwesomeIcon icon={faList} size="lg"/>
             {!isCollapsed && <span>Каталог</span>}
@@ -82,7 +82,7 @@ const Navbar = ({ setActiveView, onCollapse }) => {
           {!isCollapsed && <span>Корзина</span>}
         </div>
 
-        {user?.role === 'администратор' && (
+        {user?.role === 'admin' && (
           <>
             <div className="nav-item" onClick={() => handleViewChange('sells')}>
             <FontAwesomeIcon icon={faTag} size="lg"/>

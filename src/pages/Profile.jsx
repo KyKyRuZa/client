@@ -31,7 +31,7 @@ export const ProfileInfo = ({user}) => (
             </div>
             
         
-        {user?.role === 'администратор' && (
+        {user?.role === 'admin' && (
             <div className="admin-card">
                 
                 <div className="profile-content">
