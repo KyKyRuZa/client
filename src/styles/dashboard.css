@@ -7,7 +7,9 @@
 
 }
 
-/* header */
+/*=======================
+    Header
+=======================*/
 .header-container {
     display: flex;
     justify-content: space-between;
@@ -47,11 +49,13 @@
     cursor: pointer;
 }
 
-/* main */
+/*=======================
+    Main Content
+=======================*/
 .main-container {
     display: flex;
     justify-content: center;
-    padding: 100px 20px;
+    padding: 80px 20px;
 }
 .title{
     max-width: 600px;
@@ -91,11 +95,13 @@
 }
 .car{
     border-radius: 12px;
-    margin: -62px 0px 0px 78px;
-    padding-right: -20px;
+    margin: -62px 0px -120px 78px;
 }
 
-/* services */
+
+/*=======================
+    Services Section
+=======================*/
 .services-container{
     padding:  80px 20px;
 }
@@ -122,7 +128,9 @@
     background-color: #FFC60C;
 }
 
-/* advantage */
+/*=======================
+    Advantage Section
+=======================*/
 .advantage-container{
     padding: 80px 20px;
 }
@@ -156,7 +164,9 @@
     font-size: 18px;
 }
 
-/* catalog */
+/*=======================
+    Catalog Section
+=======================*/
 .catalog-container {
     padding: 80px 20px;
   }
@@ -166,7 +176,6 @@
     font-weight: bold;
     margin-bottom: 20px;
 }
-
 .catalog-grid {
     display: grid;
     grid-template-columns: repeat(4, 300px);
@@ -256,7 +265,10 @@
     border-radius: 4px;
     border: 1px solid #ddd;
 }
-/* contact */
+
+/*=======================
+    Contact Section
+=======================*/
 .contact-container {
     padding: 80px 20px;
 }
@@ -289,7 +301,9 @@
     border-radius: 12px;
 }
 
-/* footer */
+/*=======================
+    Footer Section
+=======================*/
 footer{
     background-color: #293138;
     color: #ffffff;
@@ -312,22 +326,328 @@ footer{
     
 }
 
-
 .hamburger{
     color: white;
 }
 
-
-@media screen and (min-width: 426px) {
-    .hamburger {
-      display: none;
-    }
+.payment-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
   }
+  
+.qr-container {
+    margin: 20px 0;
+}
 
-@media screen and (max-width: 425px) {
+.qr-container img {
+    max-width: 300px;
+    margin: 20px 0;
+}
+
+.success-message {
+    color: green;
+    padding: 20px;
+    border: 1px solid green;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+/*=======================
+    Media Section
+=======================*/
+
+@media (min-width: 769px) and (max-width: 1024px) {
     .header-container {
         height: 60px;
-        padding: 0 10px;
+        padding: 0px 10px;
+    }
+    .logo {
+        font-size: 26px;
+        width: 170px;
+    }
+    .nav-left, .nav-right {
+        font-size: 20px;
+    }
+    .nav-left a, .nav-right a {
+        margin: 0 15px;
+    }
+    .reg-btn {
+        width: 180px;
+        height: 42px;
+        font-size: 19px;
+    }
+    .main-container {
+        padding: 70px 30px;
+    }
+    .title {
+        font-size: 54px;
+        max-width: 800px;
+    }
+    .subtitle {
+        font-size: 22px;
+        max-width: 800px;
+    }
+    .btn {
+        width: 220px;
+        height: 52px;
+        font-size: 19px;
+    }
+    .car {
+        margin: -50px 0 0 50px;
+    }
+    .services-container {
+        padding: 70px 30px;
+    }
+    .services {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .services-card {
+        font-size: 20px;
+        padding: 45px 35px;
+    }
+    .advantage-container {
+        padding: 70px 30px;
+    }
+    .advantage-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .advantage-card {
+        padding: 40px 30px;
+        height: auto;
+    }
+    .card-num {
+        font-size: 45px;
+    }
+    .card-title {
+        font-size: 22px;
+    }
+    .card-subtitle {
+        font-size: 17px;
+    }
+    .catalog-container {
+        padding: 70px 30px;
+    }
+    .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+    .catalog-card {
+        max-width: 320px;
+        height: auto;
+        padding: 18px;
+    }
+    .catalog-img {
+        height: 250px;
+    }
+    .catalog-title {
+        font-size: 22px;
+    }
+    .catalog-subtitle {
+        font-size: 13px;
+        height: auto;
+    }
+    .catalog-price-container {
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+    .buy-button {
+        width: auto;
+        padding: 11px 25px;
+        font-size: 17px;
+    }
+    .basket-button {
+        width: 42px;
+        padding: 11px;
+    }
+    .contact-container {
+        padding: 70px 30px;
+    }
+    .contact-info {
+        flex-direction: row;
+        gap: 25px;
+    }
+    .card-info {
+        padding: 40px 30px;
+        height: auto;
+    }
+    .card-info p {
+        font-size: 22px;
+    }
+    .map iframe {
+        width: 100vw;
+        height: 400px;
+        margin: 0 -130px;
+        border-radius: 0;
+    }
+    .footer-container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 40px;
+    }
+    .footer-left, .footer-right {
+        flex-direction: row;
+        gap: 15px;
+    }
+    .footer-links li {
+        margin: 0 10px;
+    }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+    .header-container {
+        height: 60px;
+    }
+    .logo {
+        font-size: 24px;
+        width: 150px;
+        text-align: center;
+    }
+    .nav-left, .nav-right {
+        flex-direction: column;
+        font-size: 18px;
+    }
+    .nav-left a, .nav-right a {
+        margin: 10px 0;
+    }
+    .reg-btn {
+        width: 150px;
+        height: 40px;
+        font-size: 18px;
+    }
+    .main-container {
+        flex-direction: column;
+        padding: 50px 20px;
+    }
+    .title {
+        font-size: 48px;
+        max-width: 100%;
+    }
+    .subtitle {
+        font-size: 20px;
+        max-width: 100%;
+    }
+    .btn {
+        width: 200px;
+        height: 50px;
+        font-size: 18px;
+    }
+    .car {
+        display: none;
+    }
+
+    .services-container {
+        padding: 60px 20px;
+    }
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .services-card {
+        font-size: 18px;
+        padding: 40px 30px;
+    }
+    .advantage-container {
+        padding: 60px 20px;
+    }
+    .advantage-cards {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .advantage-card {
+        padding: 30px 20px;
+        height: auto;
+    }
+    .card-num {
+        font-size: 40px;
+    }
+    .card-title {
+        font-size: 20px;
+    }
+    .card-subtitle {
+        font-size: 16px;
+    }
+    .catalog-container {
+        padding: 60px 20px;
+    }
+    .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .catalog-card {
+        max-width: 100%;
+        height: auto;
+        padding: 15px;
+    }
+    .catalog-img {
+        height: 200px;
+    }
+    .catalog-title {
+        font-size: 20px;
+    }
+    .catalog-subtitle {
+        font-size: 12px;
+        height: auto;
+    }
+    .catalog-price-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .buy-button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .basket-button {
+        width: 40px;
+        padding: 10px;
+    }
+    .contact-container {
+        padding: 60px 20px;
+    }
+    .contact-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .card-info {
+        padding: 30px 20px;
+        height: auto;
+    }
+    .card-info p {
+        font-size: 20px;
+    }
+    .map iframe {
+        width: 100vw;
+        height: 350px;
+        margin: 0 -70px;
+        border-radius: 0;
+    }
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    .footer-left, .footer-right {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .footer-links li {
+        margin: 5px 0;
+    }
+    .hamburger {
+        display: block;
+    }
+}
+
+@media (max-width: 425px) {
+    .header-container {
+        height: 60px;
+        padding: 0px 10px;
     }
 
     .logo {
@@ -442,7 +762,12 @@ footer{
     .services {
         grid-template-columns: 1fr;
     }
-
+    .map iframe {
+        width: 100vw;
+        height: 350px;
+        margin: 0 -40px;
+        border-radius: 0;
+    }
     .services-card {
         padding: 30px 20px;
         font-size: 16px;

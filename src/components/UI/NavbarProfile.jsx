@@ -33,7 +33,7 @@ const Navbar = ({ setActiveView, onCollapse }) => {
     onCollapse(!isCollapsed);
   };
   const handleViewChange = (view) => {
-    setActiveView(view);
+    navigate(`/profile/${view}`);
     setIsMenuOpen(false);
   };
 
@@ -60,13 +60,13 @@ const Navbar = ({ setActiveView, onCollapse }) => {
         <div className="nav-header">
           {!isCollapsed && <span >Меню навигации</span>}
         </div>
-        <div className="nav-item" onClick={() => handleViewChange('profile')}>
+        <div className="nav-item" onClick={() => handleViewChange(`${user.role}`)}>
         <FontAwesomeIcon icon={faCircleUser} size="lg"/>
           {!isCollapsed && <span>Профиль</span>}
         </div>
 
         {user?.role === 'администратор' && (
-          <div className="nav-item" onClick={() => handleViewChange('catalog')}>
+          <div className="nav-item" onClick={() => handleViewChange('admin-catalog')}>
             <FontAwesomeIcon icon={faList} size="lg"/>
             {!isCollapsed && <span>Каталог</span>}
           </div>

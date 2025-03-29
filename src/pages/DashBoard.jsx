@@ -87,7 +87,7 @@ const DashBoard = () => {
               </div>
               <div className="card-info">
                 <div className='card-title'>Email</div>
-                <div className="card-subtitle">info@delron.ru</div>
+                <div className="card-subtitle">support@delron.ru</div>
               </div>
               <div className="card-info">
                 <div className='card-title'>Режим работы</div>

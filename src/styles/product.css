@@ -89,6 +89,10 @@
     cursor: pointer;
     width: 45px;
 }
+
+/*=======================
+    Media Section
+=======================*/
 @media (max-width: 425px) {
     .product-page {
         padding: 30px 20px;

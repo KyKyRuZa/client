@@ -1,8 +1,9 @@
-
 body{
   background: #293138;
 }
-
+/*=======================
+  Main Section
+=======================*/
 .main-content {
   transition: margin-left 0.5s ease;
   margin: 92px 300px;
@@ -36,7 +37,9 @@ body{
   color: white;
 }
 
-/* Catalog */
+/*=======================
+  Catalog Section
+=======================*/
 .catalog-header {
 display: flex;
 justify-content: space-between;
@@ -51,14 +54,11 @@ font-weight: bold;
 color: #ffffff;
 
 }
-
-/* Стили поиска */
 .search-container {
 max-width: 250px;
 border-radius: 4px;
 margin: 16px;
 }
-
 .search-input {
 width: 100%;
 padding: 12px;
@@ -70,18 +70,14 @@ border-radius: 4px;
 outline: none;
 transition: background-color 0.3s ease;
 }
-
 .search-input:focus {
 background-color: #495057; 
 }
-
 .search-feedback {
 color: #f56c6c; 
 font-size: 0.9rem;
 margin-top: 0.5rem;
 }
-
-/* Форма добавления товара */
 .btn-add {
 position: fixed;
 right: 40px;
@@ -133,42 +129,33 @@ color: white;
 border: none;
 border-radius: 4px;
 cursor: pointer;
-
 }
-
-/* Список товаров */
 .product-list {
 padding: 1rem;
 border-radius: 8px;
 }
-
 .admin-table {
 width: 100%;
 border-collapse: collapse;
 margin-top: 1rem;
 color: #ffffff;
 }
-
 .admin-table th,
 .admin-table td {
 padding: 0.75rem;
 text-align: left;
 border-bottom: 1px solid #495057; 
 }
-
 .admin-table th {
 background-color: #3c4651;
 font-weight: bold;
 }
-
 .admin-table tr:nth-child(even) {
 background-color: #32383e; 
 }
-
 .admin-table tr:nth-child(odd) {
 background-color: #282c34; 
 }
-
 .icon-button {
 cursor: pointer;
 background: none;
@@ -178,33 +165,26 @@ font-size: 1.2rem;
 margin-right: 0.5rem;
 transition: color 0.3s ease;
 }
-
 .icon-button.edit {
 color: #67c23a;
 font-size: 20px;
 cursor: pointer; 
 }
-
 .icon-button.edit:hover {
 color: #4caf50;
 }
-
 .icon-button.delete {
 color: #f56c6c;
 font-size: 20px;
 cursor: pointer; 
 }
-
 .icon-button.delete:hover {
 color: #ff4d4f;
 }
 
-.highlight {
-background-color: #4caf50;
-color: #ffffff;
-}
-/* Shop_Basket */
-/* Общие стили */
+/*=======================
+  Basket Section
+=======================*/
 .basket-container {
 color: #fff;
 width: 100%;
@@ -222,7 +202,6 @@ flex-direction: column;
 gap: 15px;
 }
 
-/* Стиль каждого элемента корзины */
 .basket-item {
 display: flex;
 justify-content: space-between;
@@ -295,7 +274,6 @@ font-weight: bold;
 text-align: center;
 }
 
-/* Итоговая сумма */
 .buy{
 display: flex;
   align-items: center; 
@@ -316,16 +294,16 @@ text-align: right;
 color: #fff;
 }
 
-/* Пустая корзина */
 .basket-items p {
 margin: 10px;
 font-size: 16px;
 color: #d1d1d1;
 }
-/* Настройки */
 
 
-
+/*=======================
+  Setting Section
+=======================*/
 .settings-title {
 font-size: 24px;
 font-weight: 600;
@@ -335,6 +313,7 @@ color: #fff;
 
 .settings-forms-container {
 display: flex;
+flex-direction: column;
 gap: 60px;
 margin-bottom: 30px;
 }
@@ -351,6 +330,7 @@ margin-bottom: 20px;
 
 .button-row {
 display: flex;
+flex-direction: column;
 gap: 20px;
 justify-content: center;
 }
@@ -371,7 +351,118 @@ transition: background-color 0.3s;
 background: #0056b3;
 }
 
+/*=======================
+  Media Section
+=======================*/
+@media (min-width: 426px) and (max-width: 1024px) {
+.main-content {
+  transition: margin-left 0.5s ease;
+  margin: 92px 60px 0px 295px;
+  color: gray;
+}
+.main-content.collapsed {
+    margin-left: 120px;
+}
+.basket-title {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
 
+.basket-item {
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px;
+}
+
+.basket-content {
+  flex-direction: column;
+  width: 100%;
+}
+
+.basket-img-container {
+  width: 100%;
+  flex-direction: column;
+}
+
+.basket-img {
+  width: 80px;
+  height: 80px;
+  margin-right: 0;
+  margin-bottom: 10px;
+}
+
+.basket-category {
+  font-size: 12px;
+}
+
+.basket-quantity {
+  margin-right: 0;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.quantity-btn {
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+}
+
+.basket-total-container {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.basket-total {
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.basket-actions {
+  align-self: flex-end;
+}
+.buy {
+  width: 100%;
+  padding: 8px 15px;
+  font-size: 14px;
+}
+
+.basket-items p {
+  font-size: 14px;
+}
+
+.settings-title {
+  font-size: 20px; /* Уменьшаем заголовок */
+  margin-bottom: 20px;
+}
+
+.settings-forms-container {
+  flex-direction: column; /* Формы в столбик */
+  gap: 30px; /* Уменьшаем расстояние между формами */
+}
+
+.settings-form {
+  flex: none; /* Отключаем растяжение форм */
+  width: 100%; /* Формы занимают всю ширину */
+}
+
+.settings-section h3 {
+  font-size: 16px; /* Уменьшаем заголовки секций */
+  margin-bottom: 15px;
+}
+
+.button-row {
+  flex-direction: column; /* Кнопки в столбик */
+  gap: 15px; /* Уменьшаем расстояние между кнопками */
+  align-items: center; /* Центрируем кнопки */
+}
+
+.settings-save-btn {
+  padding: 10px 20px; /* Уменьшаем размер кнопок */
+  font-size: 13px; /* Уменьшаем текст кнопок */
+}
+
+}
 
 
 @media (max-width: 425px) {
@@ -384,14 +475,12 @@ background: #0056b3;
     width: 100%;
 }
 
-/* Заголовок профиля */
 .profile-title {
     font-size: 18px;
     flex-direction: column;
     align-items: flex-start;
 }
 
-/* Информация профиля */
 .profile-info {
   font-size: 15px;
   gap: 10px; 
@@ -399,8 +488,6 @@ background: #0056b3;
 .profile-info .right{
   font-size: 15px;
 }
-
-/* Каталог */
 .catalog-header{
   border:none;
 }
@@ -414,7 +501,7 @@ background: #0056b3;
 .search-container input::placeholder {
   font-size: 12px;
 }
-/* Форма добавления товара */
+
 .btn-add{
   right: 20px;
   bottom: 20px;
@@ -442,7 +529,7 @@ background: #0056b3;
   padding: 12px;
   font-size: 16px;
 }
-/* Таблица товаров */
+
 .admin-table {
   font-size: 14px;
 }
@@ -524,8 +611,8 @@ background: #0056b3;
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: 25px;
   align-self: center;
-  margin-left: 75px;
 }
 
 .basket-amount {

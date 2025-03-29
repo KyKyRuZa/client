@@ -9,14 +9,42 @@
 ::-webkit-scrollbar {
     width: 0;
 }
-body{
+body {
     background-color: #354049;
 }
-.header-container, .main-container, .contact-container, .advantage-container, .catalog-container, .services-container, .footer-container{
+.header-container, 
+.main-container, 
+.contact-container, 
+.advantage-container, 
+.catalog-container, 
+.services-container, 
+.footer-container {
     margin: 0px 250px;
-
 }
-@media screen and (max-width: 425px) {
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .header-container, 
+    .main-container, 
+    .contact-container, 
+    .advantage-container, 
+    .catalog-container, 
+    .services-container, 
+    .footer-container {
+        margin: 0px 100px;
+    }
+}
+@media (min-width: 426px) and (max-width: 768px) {
+    .header-container, 
+    .main-container, 
+    .contact-container, 
+    .advantage-container, 
+    .catalog-container, 
+    .services-container, 
+    .footer-container {
+        margin: 0px 50px;
+    }
+}
+@media (max-width: 425px) {
     .header-container, 
     .main-container, 
     .contact-container, 
@@ -25,6 +53,5 @@ body{
     .services-container, 
     .footer-container {
         margin: 0px 20px;
-    }
-    
+    } 
 }

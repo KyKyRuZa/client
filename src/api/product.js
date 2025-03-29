@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_URL = 'https://delron.ru/api/profile';
+const API_URL = 'https://delron.ru/api/profile/admin-catalog';
 
 const productService = {
-    // Операции с продуктом
+
     async fetchProducts() {
         const response = await axios.get(API_URL);
         return response.data;
@@ -48,27 +48,6 @@ const productService = {
         await axios.delete(`${API_URL}/${productId}`);
     },
     
-    // Операции с корзиной
-    async fetchBasket(userId) {
-        const response = await axios.get(`${API_URL}/${userId}`);
-        return response.data;
-    },
-
-    // Add these methods inside productService
-    async incrementQuantity(userId, productId) {
-        const response = await axios.put(`${API_URL}/basket/increment`, {userId, productId});
-        return response.data;
-    },
-    
-    async decrementQuantity(userId, productId) {
-        const response = await axios.put(`${API_URL}/basket/decrement`, {userId, productId});
-        return response.data;
-    },
-
-
-    async removeFromCart(userId, productId) {
-        await axios.delete(`${API_URL}/${userId}/${productId}`);
-    }
 };
 
 export default productService;

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../components/Auth/Auth';
 import Navbar from '../components/UI/NavbarProfile';
 import productService from '../api/product'; 
+import basketService from '../api/basket';
 import profileService from '../api/profile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faPlus, faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
 import { IconButton } from '@mui/material';
-
 import '../styles/main.css';
-const ProfileInfo = ({user}) => (
+
+export const ProfileInfo = ({user}) => (
     <>
         <div className="profile-card">
             <div className="user-card">
@@ -50,7 +52,7 @@ const ProfileInfo = ({user}) => (
     </>
 );
 
-const Catalog = () => {
+export const AdminCatalog = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -310,7 +312,7 @@ const Catalog = () => {
     );
 };
 
-const Orders = () => {
+export const Orders = () => {
     const [orders, setOrders] = useState([]);
     return (
         <div className="order-card">
@@ -350,14 +352,14 @@ const Orders = () => {
     );
 };
 
-const Basket = () => {
+export const Basket = () => {
     const { user } = useAuth();
     const [basketItems, setBasketItems] = useState([]);
-
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchBasket = async () => {
             try {
-                const basketData = await productService.fetchBasket(user.id); // Используем сервис
+                const basketData = await basketService.fetchBasket(user.id); // Используем сервис
                 setBasketItems(basketData);
             } catch (error) {
                 console.error('Ошибка при получении корзины:', error);
@@ -372,7 +374,7 @@ const Basket = () => {
     
     const refreshBasket = async () => {
         try {
-            const basketData = await productService.fetchBasket(user.id);
+            const basketData = await basketService.fetchBasket(user.id);
             setBasketItems(basketData);
         } catch (error) {
             console.error('Error fetching basket:', error);
@@ -385,7 +387,7 @@ const Basket = () => {
 
     const incrementQuantity = async (productId) => {
         try {
-            const response = await productService.incrementQuantity(user.id, productId);
+            const response = await basketService.incrementQuantity(user.id, productId);
             if (response) {
                 await handleBasketUpdate(); 
             }
@@ -396,7 +398,7 @@ const Basket = () => {
     
     const decrementQuantity = async (productId) => {
         try {
-            const response = await productService.decrementQuantity(user.id, productId);
+            const response = await basketService.decrementQuantity(user.id, productId);
             if (response) {
                 await handleBasketUpdate(); 
             }
@@ -407,13 +409,17 @@ const Basket = () => {
     
     const removeFromCart = async (productId) => {
         try {
-            await productService.removeFromCart(user.id, productId); // Используем сервис
+            await basketService.removeFromCart(user.id, productId); // Используем сервис
             setBasketItems(basketItems.filter(item => item.productId !== productId));
             await handleBasketUpdate();
         } catch (error) {
             console.error('Error removing from cart:', error);
         }
     };
+    const handlePayment = () => {
+        const orderId = Date.now();
+        navigate(`/payment/${orderId}`);
+      };
 
     return (
         <div className="basket-container">
@@ -454,7 +460,7 @@ const Basket = () => {
                        </div>
                         ))}
                         <div className='basket-total-container'>
-                            <button className="buy">Оплатить</button>
+                            <button className="buy" onClick={handlePayment}>Оплатить</button>
                             <div className="basket-total">Итого: {basketItems.reduce((sum, item) => sum + item.totalAmount, 0)} ₽</div>
                         </div>
                     </>
@@ -464,7 +470,7 @@ const Basket = () => {
     );
 }
 
-const Sells = () => {
+export const Sells = () => {
     const [sales, setSales] = useState([]);
 
     return (
@@ -502,7 +508,7 @@ const Sells = () => {
     );
 };
 
-const Settings = () => {
+export const Settings = () => {
     const { user } = useAuth();
     const [formData, setFormData] = useState({
         firstName: user?.firstName || '',
@@ -670,18 +676,16 @@ const Settings = () => {
 const Profile = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const { user } = useAuth();
-    const [activeView, setActiveView] = useState('profile');
-
-   
+    const navigate = useNavigate();
 
     const renderContent = () => {
-        switch(activeView) {
-            case 'profile':
-                return <ProfileInfo user = {user} />;
+        switch(window.location.pathname.split('/').pop()) {
+            case `${user.role}`:
+                return <ProfileInfo user={user} />;
             case 'basket':
                 return <Basket />;
-            case 'catalog':
-                return <Catalog />;
+            case 'admin-catalog':
+                return <AdminCatalog />;
             case 'sells':
                 return <Sells />;
             case 'orders':
@@ -689,13 +693,13 @@ const Profile = () => {
             case 'settings':
                 return <Settings />;
             default:
-                return null;
+                return <ProfileInfo user={user} />;
         }
     };
 
     return (
         <div className="profile-container">
-        <Navbar setActiveView={setActiveView} onCollapse={setIsCollapsed}  />
+        <Navbar onCollapse={setIsCollapsed}/>
         <main className={`main-content ${isCollapsed ? 'collapsed' : ''}`}>
             <div className="dashboard-container">
                 {renderContent()}

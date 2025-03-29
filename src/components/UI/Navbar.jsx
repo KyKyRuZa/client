@@ -23,7 +23,7 @@ const Navbar = () => {
           <div className={`nav-right ${isMenuOpen ? 'active' : ''}`}>
               {user ? (
               <>
-                <Link to="/profile" className="profile-btn">
+                <Link to={`/profile/${user.role}`} className="profile-btn">
                   <FontAwesomeIcon icon={faCircleUser} />  
                   <span style={{ marginLeft: '8px' }}>{user.firstName}</span>
                 </Link>

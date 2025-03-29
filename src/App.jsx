@@ -10,11 +10,16 @@ import Dashboard from './pages/DashBoard';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Profile from './pages/Profile';
+import AdminCatalog from './pages/Profile';
+import Basket from './pages/Profile';
+import Orders from './pages/Profile';
+import Sells from './pages/Profile';
+import Settings from './pages/Profile';
 import Catalog from './pages/Catalog';
 import Product from './pages/Product';
 import ForgotPassword from './components/Auth/Forgot';
 import ResetPassword from './components/Auth/Reset';
-
+import Payment from './pages/Payment';
 
 function App() {
   return (
@@ -27,9 +32,18 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />}>
+            <Route index element={<Navigate to="user" />} />
+            <Route path=":role" element={<Profile />} />
+            <Route path="admin-catalog" element={<AdminCatalog />} />
+            <Route path="basket" element={<Basket />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="sells" element={<Sells />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/payment/:orderId" element={<Payment />} />
         </Routes>
       </Router>
    </AuthProvider>

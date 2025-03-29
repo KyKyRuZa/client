@@ -1,5 +1,6 @@
 import axios from 'axios';
-const API_URL = 'https://delron.ru/api/profile';
+
+const API_URL = 'https://delron.ru/api/profile/settings';
 
 const getAuthHeader = () => {
     const token = localStorage.getItem('token');
