@@ -40,6 +40,11 @@ const Product = () => {
             console.error('Error adding to basket:', error);
         }
     };
+    const handlePayment = () => {
+        const orderId = 'ORDER-' + Date.now();
+        navigate(`/payment/${orderId}`);
+    };
+
 
     return (
         <>
@@ -66,11 +71,8 @@ const Product = () => {
                             <div className="product-actions">
                                 <div className="product-price">{product.price} ₽</div>
                                 <div className="product-buttons">
-                                    <button className="buy-button">Купить</button>
-                                    <button 
-                                        className="basket-button"
-                                        onClick={handleAddToBasket}
-                                    >
+                                    <button className="buy-button" onClick={handlePayment}>Купить</button>
+                                    <button className="basket-button" onClick={handleAddToBasket} >
                                         {isAdded ? 
                                             <FontAwesomeIcon icon={faCheck} size="lg"/> : 
                                             <FontAwesomeIcon icon={faBasketShopping} size="lg" />

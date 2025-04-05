@@ -1,19 +1,16 @@
 import React from 'react';
-// import { Link } from "react-router-dom"
-// import { ReactComponent as TelegramIcon }  from '../../styles/assets/icons/telegram.svg';
-// import { ReactComponent as VKIcon }  from '../../styles/assets/icons/vk.svg';
-// import { ReactComponent as WhatsAppIcon }  from '../../styles/assets/icons/whatsapp.svg';
+import { Link } from "react-router-dom"
+
 
 const Footer = () => {
   return (
     <footer>
        <div className="footer-container">
-          <div className="footer-left">Copyright © 2024 Delron | All Rights Reserved </div>
+        <div className="footer-left">© 2024 ООО «ДЕЛЬРОН» </div>
           <div className="footer-right">
             <ul className='footer-links'>
-              <li>Пользовательское соглашение</li>
-              <li>Политика конфиденциальности</li>
-              <li>Оферта</li>
+            <li><Link to="/terms-of-service" target='_blank' >Пользовательское соглашение</Link></li>
+            <li><Link to="/privacy-policy" target='_blank' >Политика конфиденциальности</Link></li>
             </ul>
           </div>
         </div>
@@ -23,8 +20,3 @@ const Footer = () => {
 };
 
 export default Footer;
-{/* <div className="social-links">
-    <Link className = "Link" to="/"><TelegramIcon/></Link>
-    <Link className = "Link" to="/"><VKIcon/></Link>
-    <Link className = "Link" to="/"><WhatsAppIcon/></Link>
-</div>  */}

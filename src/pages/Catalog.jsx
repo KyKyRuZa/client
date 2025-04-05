@@ -57,14 +57,19 @@ const Catalog = () => {
       if (!user) {
         navigate('/login');
         return;
-    }
-    try {
-        await catalogService.addToBasket(user.id, productId);
-        setAddedProducts(prev => new Set(prev).add(productId));
-    } catch (error) {
-        console.error('Ошибка добавления товара:', error);
-    }
+      }
+      try {
+          await catalogService.addToBasket(user.id, productId);
+          setAddedProducts(prev => new Set(prev).add(productId));
+      } catch (error) {
+          console.error('Ошибка добавления товара:', error);
+      }
   };
+  const handlePayment = () => {
+    const orderId = Date.now();
+    navigate(`/payment/${orderId}`);
+  };
+
 
   return (
     <>
@@ -101,7 +106,7 @@ const Catalog = () => {
                 <div className="catalog-price-container">
                   <div className="catalog-price">{product.price} ₽</div>
                   <div className="btn-container">
-                    <button className="buy-button">Купить</button>
+                    <button className="buy-button" onClick={handlePayment}>Купить</button>
                     <button className="basket-button" onClick={() => handleAddToBasket(product.id)} >
                       {addedProducts.has(product.id) ? <FontAwesomeIcon icon={faCheck} size="lg"/> : <FontAwesomeIcon icon={faBasketShopping} size="lg"/>} 
                     </button>

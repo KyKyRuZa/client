@@ -1,0 +1,111 @@
+.privacy-container {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #354049;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  
+  .privacy-container h1,
+  .privacy-container h2,
+  .privacy-container h3 {
+    color: #f5a623;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .privacy-container p,
+  .privacy-container ul,
+  .privacy-container li {
+    color: #e0e0e0;
+    margin-bottom: 10px;
+  }
+  
+  .privacy-container ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .privacy-container .term-item {
+    margin-bottom: 15px;
+  }
+  
+  .privacy-container strong {
+    color: #ffffff;
+  }
+  
+  .privacy-container a {
+    color: #4da1ff;
+    text-decoration: none;
+  }
+  
+  .privacy-container a:hover {
+    text-decoration: underline;
+  }
+  
+  .privacy-container .data-types li,
+  .privacy-container .privacy-purposes li {
+    margin-bottom: 5px;
+  }
+  
+  .privacy-container .privacy-responsibility li {
+    margin-bottom: 5px;
+  }
+  
+  .agreement-container {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #354049;
+    color: #ffffff;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  
+  .agreement-container h1,
+  .agreement-container h2,
+  .agreement-container h3 {
+    color: #f5a623;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .agreement-container p,
+  .agreement-container ul,
+  .agreement-container li {
+    color: #e0e0e0;
+    margin-bottom: 10px;
+  }
+  
+  .agreement-container ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .agreement-container .term-item {
+    margin-bottom: 15px;
+  }
+  
+  .agreement-container strong {
+    color: #ffffff;
+  }
+  
+  .agreement-container a {
+    color: #4da1ff;
+    text-decoration: none;
+  }
+  
+  .agreement-container a:hover {
+    text-decoration: underline;
+  }
+  
+  .agreement-container .data-types li,
+  .agreement-container .agreement-purposes li {
+    margin-bottom: 5px;
+  }
+  
+  .agreement-container .agreement-responsibility li {
+    margin-bottom: 5px;
+  }
+  

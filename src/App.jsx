@@ -20,7 +20,8 @@ import Product from './pages/Product';
 import ForgotPassword from './components/Auth/Forgot';
 import ResetPassword from './components/Auth/Reset';
 import Payment from './pages/Payment';
-
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 function App() {
   return (
     <AuthProvider>
@@ -44,6 +45,9 @@ function App() {
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/payment/:orderId" element={<Payment />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          
         </Routes>
       </Router>
    </AuthProvider>

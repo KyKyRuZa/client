@@ -273,8 +273,8 @@
     padding: 80px 20px;
 }
 .contact-info{
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
     gap: 20px;
     padding-bottom: 70px;
@@ -282,7 +282,6 @@
 .card-info{
     padding: 48px 40px;
     border-radius: 12px;
-    width: 100%;
     height: 116px;
     background-color: #D9D9D9;
 
@@ -323,9 +322,16 @@ footer{
 }
 .footer-links li{
     list-style-type: none;
-    
+}
+.footer-links a {
+    text-decoration: none;
+    color: #FFC60C;
+    transition: color 0.3s ease;
 }
 
+.footer-links a:hover {
+    color: #ffffff;
+}
 .hamburger{
     color: white;
 }
@@ -357,11 +363,10 @@ footer{
 /*=======================
     Media Section
 =======================*/
-
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 1025px) and (max-width: 1440px) {
     .header-container {
-        height: 60px;
-        padding: 0px 10px;
+        height: 70px;
+        padding: 0px 20px;
     }
     .logo {
         font-size: 26px;
@@ -395,7 +400,8 @@ footer{
         font-size: 19px;
     }
     .car {
-        margin: -50px 0 0 50px;
+        margin: -40px 0 -250px 0px;
+        height: 700px;
     }
     .services-container {
         padding: 70px 30px;
@@ -417,7 +423,7 @@ footer{
     }
     .advantage-card {
         padding: 40px 30px;
-        height: auto;
+        height: 150px;
     }
     .card-num {
         font-size: 45px;
@@ -468,7 +474,145 @@ footer{
         padding: 70px 30px;
     }
     .contact-info {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+    .card-info {
+        padding: 40px 15px;
+        height: auto;
+    }
+    .card-info p {
+        font-size: 22px;
+    }
+    .map iframe {
+        width: 100%;
+        height: 400px;
+    }
+    .footer-container {
+        padding: 20px 40px;
+    }
+    .footer-left, .footer-right {
+        gap: 15px;
+    }
+    .footer-links li {
+        margin: 0 10px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .header-container {
+        height: 60px;
+        padding: 0px 10px;
+    }
+    .logo {
+        font-size: 26px;
+        width: 170px;
+    }
+    .nav-left, .nav-right {
+        font-size: 20px;
+    }
+    .nav-left a, .nav-right a {
+        margin: 0 15px;
+    }
+    .reg-btn {
+        width: 180px;
+        height: 42px;
+        font-size: 19px;
+    }
+    .main-container {
+        padding: 70px 30px;
+    }
+    .title {
+        font-size: 54px;
+        max-width: 800px;
+    }
+    .subtitle {
+        font-size: 22px;
+        max-width: 800px;
+    }
+    .btn {
+        width: 220px;
+        height: 52px;
+        font-size: 19px;
+    }
+    .car {
+        margin: -40px 0 -250px 0px;
+        height: 700px;
+    }
+    .services-container {
+        padding: 70px 30px;
+    }
+    .services {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .services-card {
+        font-size: 20px;
+        padding: 45px 35px;
+    }
+    .advantage-container {
+        padding: 70px 30px;
+    }
+    .advantage-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .advantage-card {
+        padding: 40px 30px;
+        height: 150px;
+    }
+    .card-num {
+        font-size: 45px;
+    }
+    .card-title {
+        font-size: 22px;
+    }
+    .card-subtitle {
+        font-size: 17px;
+    }
+    .catalog-container {
+        padding: 70px 30px;
+    }
+    .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+    .catalog-card {
+        max-width: 320px;
+        height: auto;
+        padding: 18px;
+    }
+    .catalog-img {
+        height: 250px;
+    }
+    .catalog-title {
+        font-size: 22px;
+    }
+    .catalog-subtitle {
+        font-size: 13px;
+        height: auto;
+    }
+    .catalog-price-container {
         flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+    .buy-button {
+        width: auto;
+        padding: 11px 25px;
+        font-size: 17px;
+    }
+    .basket-button {
+        width: 42px;
+        padding: 11px;
+    }
+    .contact-container {
+        
+       
+        padding: 70px 30px;
+    }
+    .contact-info {
+        grid-template-columns: 1fr;
         gap: 25px;
     }
     .card-info {
@@ -544,7 +688,7 @@ footer{
         padding: 60px 20px;
     }
     .services {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:  1fr;
         gap: 15px;
     }
     .services-card {
@@ -560,7 +704,7 @@ footer{
     }
     .advantage-card {
         padding: 30px 20px;
-        height: auto;
+        height: 80px;
     }
     .card-num {
         font-size: 40px;
@@ -611,7 +755,7 @@ footer{
         padding: 60px 20px;
     }
     .contact-info {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 20px;
     }
     .card-info {
@@ -628,8 +772,8 @@ footer{
         border-radius: 0;
     }
     .footer-container {
-        flex-direction: column;
-        text-align: center;
+        flex-direction:  column-reverse;
+        gap: 20px;
         padding: 20px;
     }
     .footer-left, .footer-right {
@@ -798,14 +942,12 @@ footer{
     }
 
     .contact-info {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
     .card-info{
         height: 50px;
         padding: 30px 20px;
     }
-    
-
     .footer-container {
         flex-direction:  column-reverse;
         gap: 20px;

@@ -22,8 +22,7 @@ const DashBoard = () => {
                 <p className='text'> 
                   Каталог 
                   <FontAwesomeIcon icon={faArrowRight} size='sm' className='arw'/>
-                </p> 
-                
+                </p>
               </Link>
             </div>
               <Car className='car'/>
