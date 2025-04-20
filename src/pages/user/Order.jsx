@@ -1,6 +1,6 @@
 // Orders.js
 import React, { useState } from 'react';
-import InfoMessage from '../components/UI/InfoMessage';
+import InfoMessage from '../../components/UI/InfoMessage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 

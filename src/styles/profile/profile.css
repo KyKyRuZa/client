@@ -1,3 +1,18 @@
+.nav-subitems {
+  padding-left: 45px;
+  transition: background 0.3s;
+}
+
+.nav-subitem {
+  padding: 8px 16px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.nav-subitem:hover {
+  background: rgba(255,255,255,0.1);
+  transition: all 0.7s ease;
+}
 .sidebar {
   position: fixed;
   left: 0;
@@ -179,7 +194,14 @@
   .sidebar-nav.active, .sidebar-footer.active {
     left: 0;
   }
-
+  .submenu {
+    padding-left: 20px;
+  }
+  
+  .submenu-item {
+    padding: 14px 20px;
+    font-size: 16px;
+  }
   .nav-item {
     padding: 15px 20px;
     font-size: 18px;

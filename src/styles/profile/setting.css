@@ -1,0 +1,60 @@
+.form-setting-group{
+    margin-bottom: 20px;
+    text-align: left;
+    width: 50%;
+  }
+  .form-setting-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666666;
+    font-weight: 500;
+  }
+  .form-setting-group input {
+    box-sizing: border-box;
+    height: 60px;
+    padding: 10px 14px;
+    width: 100%;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  .form-setting-group input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  .settings-forms-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-bottom: 30px;
+  }
+  .settings-form {
+    flex: 1;
+  }
+  .settings-section h3 {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .button-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+  }
+  .settings-save-btn {
+    padding: 12px 24px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .settings-save-btn:hover {
+    background: #0056b3;
+  }

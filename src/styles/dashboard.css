@@ -4,7 +4,6 @@
     font-weight: 700;
     color: #FFC60C;
     margin-bottom: 10px;;
-
 }
 
 /*=======================
@@ -193,14 +192,19 @@
     background-color: #fff;
     border-radius: 24px;
   }
-.catalog-img{
-    width: 100%; 
-    height: 300px;
+
+.catalog-img img{
+    width: 100%; /* Занимает всю доступную ширину */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    object-fit: contain; /* Сохраняет пропорции и уменьшает изображение */
+    display: block; /* Убирает лишние отступы */
     background-size: cover; 
     background-position: center; 
     border-radius: 18px;
-}
-.catalog-title{
+    margin-bottom: 30px;
+    }
+
+.catalog-title-black{
     text-decoration: none;
     font-size: 24px;
     font-weight: 700;
@@ -211,12 +215,12 @@
     font-weight: 400;
     color: #000000;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;    
+    -webkit-line-clamp: 2;
+    line-clamp: 2;    
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 70px;
+    height: auto;
 }
 .catalog-price-container{
     position: absolute;
@@ -364,447 +368,166 @@ footer{
     Media Section
 =======================*/
 @media (min-width: 1025px) and (max-width: 1440px) {
-    .header-container {
-        height: 70px;
-        padding: 0px 20px;
-    }
-    .logo {
-        font-size: 26px;
-        width: 170px;
-    }
-    .nav-left, .nav-right {
-        font-size: 20px;
-    }
-    .nav-left a, .nav-right a {
-        margin: 0 15px;
-    }
-    .reg-btn {
-        width: 180px;
-        height: 42px;
-        font-size: 19px;
-    }
-    .main-container {
-        padding: 70px 30px;
-    }
-    .title {
-        font-size: 54px;
-        max-width: 800px;
-    }
-    .subtitle {
-        font-size: 22px;
-        max-width: 800px;
-    }
-    .btn {
-        width: 220px;
-        height: 52px;
-        font-size: 19px;
-    }
-    .car {
-        margin: -40px 0 -250px 0px;
-        height: 700px;
-    }
-    .services-container {
-        padding: 70px 30px;
-    }
-    .services {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-    .services-card {
-        font-size: 20px;
-        padding: 45px 35px;
-    }
-    .advantage-container {
-        padding: 70px 30px;
-    }
-    .advantage-cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    .advantage-card {
-        padding: 40px 30px;
-        height: 150px;
-    }
-    .card-num {
-        font-size: 45px;
-    }
-    .card-title {
-        font-size: 22px;
-    }
-    .card-subtitle {
-        font-size: 17px;
-    }
-    .catalog-container {
-        padding: 70px 30px;
-    }
-    .catalog-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 22px;
-    }
-    .catalog-card {
-        max-width: 320px;
-        height: auto;
-        padding: 18px;
-    }
-    .catalog-img {
-        height: 250px;
-    }
-    .catalog-title {
-        font-size: 22px;
-    }
-    .catalog-subtitle {
-        font-size: 13px;
-        height: auto;
-    }
-    .catalog-price-container {
-        flex-direction: row;
-        align-items: center;
-        gap: 15px;
-    }
-    .buy-button {
-        width: auto;
-        padding: 11px 25px;
-        font-size: 17px;
-    }
-    .basket-button {
-        width: 42px;
-        padding: 11px;
-    }
-    .contact-container {
-        padding: 70px 30px;
-    }
-    .contact-info {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
-    }
-    .card-info {
-        padding: 40px 15px;
-        height: auto;
-    }
-    .card-info p {
-        font-size: 22px;
-    }
-    .map iframe {
-        width: 100%;
-        height: 400px;
-    }
-    .footer-container {
-        padding: 20px 40px;
-    }
-    .footer-left, .footer-right {
-        gap: 15px;
-    }
-    .footer-links li {
-        margin: 0 10px;
-    }
+    /* Header */
+    .header-container { height: 70px; padding: 0 20px; }
+    .logo { font-size: 26px; width: 170px; }
+    .nav-left, .nav-right { font-size: 20px; }
+    .reg-btn { width: 180px; height: 42px; font-size: 19px; }
+
+    /* Main Content */
+    .main-container { padding: 70px 30px; }
+    .title { font-size: 54px; max-width: 800px; }
+    .subtitle { font-size: 22px; max-width: 800px; }
+    .btn { width: 220px; height: 52px; font-size: 19px; }
+    .car { margin: -40px 0 -250px 0; height: 700px; }
+
+    /* Services */
+    .services-container { padding: 70px 30px; }
+    .services { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .services-card { font-size: 20px; padding: 45px 35px; }
+
+    /* Advantage */
+    .advantage-container { padding: 70px 30px; }
+    .advantage-cards { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .advantage-card { padding: 40px 30px; height: 150px; }
+    .card-num { font-size: 45px; }
+    .card-title { font-size: 22px; }
+    .card-subtitle { font-size: 17px; }
+
+    /* Catalog */
+    .catalog-container { padding: 70px 30px; }
+    .catalog-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .catalog-card { max-width: 320px; padding: 18px; }
+    .catalog-title-black { font-size: 22px; }
+    .catalog-subtitle { font-size: 13px; }
+    .catalog-price-container { flex-direction: row; align-items: center;}
+    .catalog-price{ font-size: 18px;}
+    .buy-button { padding: 11px 25px; font-size: 17px; }
+    .basket-button { width: 42px; padding: 11px; }
+
+    /* Contact */
+    .contact-container { padding: 70px 30px; }
+    .contact-info { grid-template-columns: repeat(3, 1fr); gap: 25px; }
+    .card-info { padding: 40px 15px; height: auto; }
+    .card-info p { font-size: 22px; }
+    .map iframe { width: 100%; height: 400px; }
+
+    /* Footer */
+    .footer-container { padding: 20px 40px; }
+    .footer-left, .footer-right { gap: 15px; }
+    .footer-links li { margin: 0 10px; }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-    .header-container {
-        height: 60px;
-        padding: 0px 10px;
-    }
-    .logo {
-        font-size: 26px;
-        width: 170px;
-    }
-    .nav-left, .nav-right {
-        font-size: 20px;
-    }
-    .nav-left a, .nav-right a {
-        margin: 0 15px;
-    }
-    .reg-btn {
-        width: 180px;
-        height: 42px;
-        font-size: 19px;
-    }
-    .main-container {
-        padding: 70px 30px;
-    }
-    .title {
-        font-size: 54px;
-        max-width: 800px;
-    }
-    .subtitle {
-        font-size: 22px;
-        max-width: 800px;
-    }
-    .btn {
-        width: 220px;
-        height: 52px;
-        font-size: 19px;
-    }
-    .car {
-        margin: -40px 0 -250px 0px;
-        height: 700px;
-    }
-    .services-container {
-        padding: 70px 30px;
-    }
-    .services {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-    .services-card {
-        font-size: 20px;
-        padding: 45px 35px;
-    }
-    .advantage-container {
-        padding: 70px 30px;
-    }
-    .advantage-cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    .advantage-card {
-        padding: 40px 30px;
-        height: 150px;
-    }
-    .card-num {
-        font-size: 45px;
-    }
-    .card-title {
-        font-size: 22px;
-    }
-    .card-subtitle {
-        font-size: 17px;
-    }
-    .catalog-container {
-        padding: 70px 30px;
-    }
-    .catalog-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 22px;
-    }
-    .catalog-card {
-        max-width: 320px;
-        height: auto;
-        padding: 18px;
-    }
-    .catalog-img {
-        height: 250px;
-    }
-    .catalog-title {
-        font-size: 22px;
-    }
-    .catalog-subtitle {
-        font-size: 13px;
-        height: auto;
-    }
-    .catalog-price-container {
-        flex-direction: row;
-        align-items: center;
-        gap: 15px;
-    }
-    .buy-button {
-        width: auto;
-        padding: 11px 25px;
-        font-size: 17px;
-    }
-    .basket-button {
-        width: 42px;
-        padding: 11px;
-    }
-    .contact-container {
-        
-       
-        padding: 70px 30px;
-    }
-    .contact-info {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-    .card-info {
-        padding: 40px 30px;
-        height: auto;
-    }
-    .card-info p {
-        font-size: 22px;
-    }
-    .map iframe {
-        width: 100vw;
-        height: 400px;
-        margin: 0 -130px;
-        border-radius: 0;
-    }
-    .footer-container {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 20px 40px;
-    }
-    .footer-left, .footer-right {
-        flex-direction: row;
-        gap: 15px;
-    }
-    .footer-links li {
-        margin: 0 10px;
-    }
+    /* Header */
+    .header-container { height: 60px; padding: 0 10px; }
+    .logo { font-size: 26px; width: 170px; }
+    .nav-left, .nav-right { font-size: 20px; }
+    .reg-btn { width: 180px; height: 42px; font-size: 19px; }
+
+    /* Main Content */
+    .main-container { padding: 70px 30px; }
+    .title { font-size: 54px; max-width: 800px; }
+    .subtitle { font-size: 22px; max-width: 800px; }
+    .btn { width: 220px; height: 52px; font-size: 19px; }
+    .car { margin: -40px 0 -250px 0; height: 700px; }
+
+    /* Services */
+    .services-container { padding: 70px 30px; }
+    .services { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .services-card { font-size: 20px; padding: 45px 35px; }
+
+    /* Advantage */
+    .advantage-container { padding: 70px 30px; }
+    .advantage-cards { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .advantage-card { padding: 40px 30px; height: 150px; }
+    .card-num { font-size: 45px; }
+    .card-title { font-size: 22px; }
+    .card-subtitle { font-size: 17px; }
+
+    /* Catalog */
+    .catalog-container { padding: 70px 30px; }
+    .catalog-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .catalog-card { max-width: 320px; height: 400px; padding: 18px; }
+    
+    .catalog-title-black { font-size: 20px; }
+    .catalog-subtitle { font-size: 13px; }
+    .catalog-price-container { flex-direction: row; align-items: center;}
+    .catalog-price{ font-size: 18px;}
+    .buy-button { padding: 11px 25px;  }
+    .basket-button { width: 42px; padding: 11px; }
+
+    /* Contact */
+    .contact-container { padding: 70px 30px; }
+    .contact-info { grid-template-columns: 1fr; gap: 25px; }
+    .card-info { padding: 40px 30px; height: auto; }
+    .card-info p { font-size: 22px; }
+    .map iframe { width: 100vw; height: 400px; margin: 0 -130px; border-radius: 0; }
+
+    /* Footer */
+    .footer-container { flex-direction: row; justify-content: space-between; padding: 20px 40px; }
+    .footer-left, .footer-right { flex-direction: row; gap: 15px; }
+    .footer-links li { margin: 0 10px; }
 }
 
 @media (min-width: 426px) and (max-width: 768px) {
-    .header-container {
-        height: 60px;
-    }
-    .logo {
-        font-size: 24px;
-        width: 150px;
-        text-align: center;
-    }
-    .nav-left, .nav-right {
-        flex-direction: column;
-        font-size: 18px;
-    }
-    .nav-left a, .nav-right a {
-        margin: 10px 0;
-    }
-    .reg-btn {
-        width: 150px;
-        height: 40px;
-        font-size: 18px;
-    }
-    .main-container {
-        flex-direction: column;
-        padding: 50px 20px;
-    }
-    .title {
-        font-size: 48px;
-        max-width: 100%;
-    }
-    .subtitle {
-        font-size: 20px;
-        max-width: 100%;
-    }
-    .btn {
-        width: 200px;
-        height: 50px;
-        font-size: 18px;
-    }
-    .car {
-        display: none;
-    }
+    /* Header */
+    .header-container { height: 60px; }
+    .logo { font-size: 24px; width: 150px; text-align: center; }
+    .nav-left, .nav-right { flex-direction: column; font-size: 18px; }
+    .reg-btn { width: 150px; height: 40px; font-size: 18px; }
 
-    .services-container {
-        padding: 60px 20px;
-    }
-    .services {
-        grid-template-columns:  1fr;
-        gap: 15px;
-    }
-    .services-card {
-        font-size: 18px;
-        padding: 40px 30px;
-    }
-    .advantage-container {
-        padding: 60px 20px;
-    }
-    .advantage-cards {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    .advantage-card {
-        padding: 30px 20px;
-        height: 80px;
-    }
-    .card-num {
-        font-size: 40px;
-    }
-    .card-title {
-        font-size: 20px;
-    }
-    .card-subtitle {
-        font-size: 16px;
-    }
-    .catalog-container {
-        padding: 60px 20px;
-    }
-    .catalog-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    .catalog-card {
-        max-width: 100%;
-        height: auto;
-        padding: 15px;
-    }
-    .catalog-img {
-        height: 200px;
-    }
-    .catalog-title {
-        font-size: 20px;
-    }
-    .catalog-subtitle {
-        font-size: 12px;
-        height: auto;
-    }
-    .catalog-price-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    .buy-button {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-    }
-    .basket-button {
-        width: 40px;
-        padding: 10px;
-    }
-    .contact-container {
-        padding: 60px 20px;
-    }
-    .contact-info {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    .card-info {
-        padding: 30px 20px;
-        height: auto;
-    }
-    .card-info p {
-        font-size: 20px;
-    }
-    .map iframe {
-        width: 100vw;
-        height: 350px;
-        margin: 0 -70px;
-        border-radius: 0;
-    }
-    .footer-container {
-        flex-direction:  column-reverse;
-        gap: 20px;
-        padding: 20px;
-    }
-    .footer-left, .footer-right {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .footer-links li {
-        margin: 5px 0;
-    }
-    .hamburger {
-        display: block;
-    }
+    /* Main Content */
+    .main-container { flex-direction: column; padding: 50px 20px; }
+    .title { font-size: 48px; max-width: 100%; }
+    .subtitle { font-size: 20px; max-width: 100%; }
+    .btn { width: 200px; height: 50px; font-size: 18px; }
+    .car { display: none; }
+
+    /* Services */
+    .services-container { padding: 60px 20px; }
+    .services { grid-template-columns: 1fr; gap: 15px; }
+    .services-card { font-size: 18px; padding: 40px 30px; }
+
+    /* Advantage */
+    .advantage-container { padding: 60px 20px; }
+    .advantage-cards { grid-template-columns: 1fr; gap: 15px; }
+    .advantage-card { padding: 30px 20px; height: 80px; }
+    .card-num { font-size: 40px; }
+    .card-title { font-size: 20px; }
+    .card-subtitle { font-size: 16px; }
+
+    /* Catalog */
+    .catalog-container { padding: 60px 20px; }
+    .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .catalog-card { max-width: 100%; padding: 15px; }
+    .catalog-title-black { font-size:20px; }
+    .catalog-subtitle { font-size: 16px; }
+    .catalog-price-container { flex-direction: row; align-items: center;}
+    .catalog-price{ font-size: 18px;}
+    .buy-button { width: 100%; padding: 10px; font-size: 16px; }
+    .basket-button { width: 40px; padding: 10px; }
+
+    /* Contact */
+    .contact-container { padding: 60px 20px; }
+    .contact-info { grid-template-columns: 1fr; gap: 20px; }
+    .card-info { padding: 30px 20px; height: auto; }
+    .card-info p { font-size: 20px; }
+    .map iframe { width: 100vw; height: 350px; margin: 0 -70px; border-radius: 0; }
+
+    /* Footer */
+    .footer-container { flex-direction: column-reverse; gap: 20px; padding: 20px; }
+    .footer-left, .footer-right { flex-direction: column; gap: 10px; }
+    .footer-links li { margin: 5px 0; }
+    .hamburger { display: block; }
 }
 
 @media (max-width: 425px) {
-    .header-container {
-        height: 60px;
-        padding: 0px 10px;
-    }
-
-    .logo {
-        width: 120px;
-        font-size: 20px;
-    }
-    .text{
-        font-size: 14px;
-    }
-    .arw{
-        width: 20px;
-        height: 20px;
-    }
+    /* Header */
+    .header-container { height: 60px; padding: 0px 10px; }
+    .logo { width: 120px; font-size: 20px; }
+    .text { font-size: 14px; }
+    .arw { width: 20px; height: 20px; }
     .hamburger {
         position: absolute;
         top: 18px;
@@ -814,148 +537,61 @@ footer{
         color: white;
         font-size: 24px;
     }
-    
-      .nav-right {
+    .nav-right {
         display: flex;
         position: fixed;
-        top: -100%;
+        top: 0;
         left: 0;
         width: 100%;
         height: 100vh;
         background: #293138;
         flex-direction: column;
         align-items: center;
-        transition: 0.8s ease;
+        justify-content: center;
+        transform: translateY(-100%);
+        transition: transform 0.8s ease;
         z-index: 1;
-      }
-      .nav-right .profile-btn{
-        margin: 100px 0;
-      }
-      .nav-right.active {
-        top: 0;
-        z-index: 1;
-        margin-top: 100px;
-      }
+    }
+    .nav-right .profile-btn { margin: 100px 0; }
+    .nav-right.active { transform: translateY(0); }
+    .nav-right a { margin: 10px 20px; font-size: 18px; }
+    .nav-left { z-index: 2; display: block; }
+    .reg-btn { height: 45px; width: 160px; font-size: 20px; }
+    .car { display: none; }
     
-      .nav-right a {
-        margin: 10px 20px;
-        font-size: 18px;
-      }
-      .nav-left{
-        z-index: 2;
-        display: block;
-      }
-    .reg-btn {
-        height: 45px;
-        width: 160px;
-        font-size:20px;
-    }
-    .car{
-        display: none;
-    }
-
-    .main-container {
-        padding: 40px 10px;
-    }
+    /* Main Content */
+    .main-container { padding: 40px 10px; }
+    .catalog-card { max-width: 100%; padding: 12px; }
+    .catalog-title-black { font-size: 16px; }
+    .card-img { height: 180px; }
+    .card-title { font-size: 16px; }
+    .card-subtitle { font-size: 14px; padding-bottom: 12px; }
+    .card-price { font-size: 18px; padding-bottom: 8px; }
+    .card-btn { height: 40px; font-size: 14px; padding: 10px 15px; }
+    .title { font-size: 32px; margin-bottom: 20px; }
+    .subtitle { font-size: 18px; margin-bottom: 20px; }
+    .btn { height: 45px; width: 200px; }
+    .services { grid-template-columns: 1fr; }
+    .map iframe { width: 100vw; height: 350px; margin: 0 -40px; border-radius: 0; }
     
-    .catalog-card {
-        max-width: 100%;
-        padding: 12px;
-      }
+    /* Services */
+    .services-card { padding: 30px 20px; font-size: 16px; }
     
-      .card-img {
-        height: 180px;
-      }
+    /* Advantage */
+    .advantage-cards { grid-template-columns: 1fr; width: 100%; }
+    .advantage-card { padding: 30px 20px; }
+    .card-title { font-size: 20px; }
+    .card-subtitle { font-size: 13px; }
+    .card-num { font-size: 30px; }
     
-      .card-title {
-        font-size: 16px;
-      }
+    /* Catalog */
+    .catalog-grid { grid-template-columns: 1fr; }
     
-      .card-subtitle {
-        font-size: 14px;
-        padding-bottom: 12px;
-      }
+    /* Contact */
+    .contact-info { grid-template-columns: 1fr; }
+    .card-info { height: 50px; padding: 30px 20px; }
     
-      .card-price {
-        font-size: 18px;
-        padding-bottom: 8px;
-      }
-    
-      .card-btn {
-        height: 40px;
-        font-size: 14px;
-        padding: 10px 15px;
-      }
-
-    .title {
-        font-size: 32px;
-        margin-bottom: 20px;
-    }
-
-    .subtitle {
-        
-        font-size: 18px;
-        margin-bottom: 20px;
-    }
-
-    .btn {
-        height: 45px;
-        width: 200px;
-    }
-
-    .services {
-        grid-template-columns: 1fr;
-    }
-    .map iframe {
-        width: 100vw;
-        height: 350px;
-        margin: 0 -40px;
-        border-radius: 0;
-    }
-    .services-card {
-        padding: 30px 20px;
-        font-size: 16px;
-    }
-
-    .advantage-cards {
-        grid-template-columns: 1fr;
-        width: 100%;
-    }
-
-    .advantage-card {
-        padding: 30px 20px;
-    }
-
-
-    .card-title{
-        font-size: 20px;
-    }
-    .card-subtitle{
-        font-size: 13px;
-    }
-    .card-num{
-        font-size: 30px;
-    }
-
-    .catalog-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-info {
-        grid-template-columns: 1fr;
-    }
-    .card-info{
-        height: 50px;
-        padding: 30px 20px;
-    }
-    .footer-container {
-        flex-direction:  column-reverse;
-        gap: 20px;
-        padding: 20px;
-    }
-    .footer-left, .footer-right {
-        text-align: center;
-        font-size: 16px;
-    }
-    
+    /* Footer */
+    .footer-container { flex-direction: column-reverse; gap: 20px; padding: 20px; }
+    .footer-left, .footer-right { text-align: center; font-size: 16px; }
 }

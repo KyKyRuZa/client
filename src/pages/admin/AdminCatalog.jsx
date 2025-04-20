@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBoxOpen, faPlus, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { IconButton } from '@mui/material';
-import InfoMessage from '../components/UI/InfoMessage';
-import productService from '../api/product';
+import InfoMessage from '../../components/UI/InfoMessage';
+import productService from '../../api/product';
+
+const MAX_FILE_SIZE = 2 * 1024 * 1024;
 
 export const AdminCatalog = () => {
+    const [imageError, setImageError] = useState('');
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -50,10 +53,16 @@ export const AdminCatalog = () => {
     };
 
     const handleImageChange = (e) => {
-        setNewProduct(prev => ({
-            ...prev,
-            image: e.target.files[0]
-        }));
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > MAX_FILE_SIZE) {
+                setImageError('Размер файла превышает допустимый лимит (2 MB).');
+                setNewProduct(prev => ({ ...prev, image: null })); 
+            } else {
+                setImageError(''); 
+                setNewProduct(prev => ({ ...prev, image: file })); 
+            }
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -161,6 +170,10 @@ export const AdminCatalog = () => {
             {isAddingProduct ? (
                 <form onSubmit={handleSubmit} className="add-product-form">
                     <input type="file" accept="image/*" onChange={handleImageChange} required={!newProduct.id} />
+                    <small style={{ color: '#888', fontSize: '12px'}}>
+                        Допустимый формат: JPG, PNG. Максимальный размер: 2 MB. Разрешение: 300x300.
+                    </small>
+                    {imageError && <p style={{ color: 'red', fontSize: '12px' }}>{imageError}</p>}
                     <select value={newProduct.category} onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })} required >
                         <option value="">Выберите категорию</option>
                         <option value="Авто краски">Авто краски</option>

@@ -1,81 +1,80 @@
 .parent {
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-    height: 60vh; 
-    width: 100%; 
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-    padding: 20px;
-    text-align: center;
-  }
-  
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  height: 60vh; 
+  width: 100%; 
+}
+
+.container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.icon {
+  font-size: 48px;
+  color: #ffffff; 
+  margin-bottom: 10px;
+}
+
+.text {
+  font-size: 18px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
   .icon {
-    font-size: 48px;
-    color: #ffffff; 
-    margin-bottom: 10px;
+    font-size: 42px;
   }
   
   .text {
-    font-size: 18px;
-    color: #ffffff;
-    margin-bottom: 20px;
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .icon {
+    font-size: 40px;
   }
   
-  @media (min-width: 1025px) and (max-width: 1440px) {
-    .icon {
-      font-size: 42px;
-    }
-    
-    .text {
-      font-size: 17px;
-    }
+  .text {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+  .parent {
+    height: 50vh;
   }
   
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .icon {
-      font-size: 40px;
-    }
-    
-    .text {
-      font-size: 16px;
-    }
+  .icon {
+    font-size: 36px;
   }
   
-  @media (min-width: 426px) and (max-width: 768px) {
-    .parent {
-      height: 50vh;
-    }
-    
-    .icon {
-      font-size: 36px;
-    }
-    
-    .text {
-      font-size: 15px;
-    }
+  .text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 425px) {
+  .parent {
+    height: 40vh;
   }
   
-  @media (max-width: 425px) {
-    .parent {
-      height: 40vh;
-    }
-    
-    .container {
-      padding: 15px;
-    }
-    
-    .icon {
-      font-size: 32px;
-    }
-    
-    .text {
-      font-size: 14px;
-    }
+  .container {
+    padding: 15px;
   }
   
+  .icon {
+    font-size: 32px;
+  }
+  
+  .text {
+    font-size: 14px;
+  }
+}

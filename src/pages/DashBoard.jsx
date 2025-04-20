@@ -16,7 +16,7 @@ const DashBoard = () => {
         <main> {/* Основной */}
           <div className='main-container'>
             <div>
-              <div className='title'>Ваш автомобиль наш цвет</div>
+              <div className='title'>Ваш автомобиль — наш цвет</div>
               <div className="subtitle">Мы предлагаем услуги опытного колориста и широкий ассортимент высококачественных автомобильных красок, которые помогут вернуть вашему авто первозданный блеск или придать ему совершенно новый облик.</div>
               <Link to="/catalog" className='btn'> 
                 <p className='text'> 
@@ -82,7 +82,7 @@ const DashBoard = () => {
             <div className="contact-info">
               <div className="card-info">
                   <div className='card-title'>Телефон</div>
-                  <div className="card-subtitle">+7 (917) 276-27-68</div>
+                  <div className="card-subtitle">+7 917 276-27-68</div>
               </div>
               <div className="card-info">
                 <div className='card-title'>Email</div>
@@ -93,6 +93,7 @@ const DashBoard = () => {
                 <div className="card-subtitle">Пн-Пт: 9:00 - 18:00</div>
               </div>
             </div>
+            <div className="title-primary">Адрес</div>
             <div className="map">
               <iframe src="https://yandex.ru/map-widget/v1/?ll=49.070500%2C55.843879&mode=whatshere&utm_source=share&whatshere%5Bpoint%5D=49.070499%2C55.843879&whatshere%5Bzoom%5D=17&z=16"
                   width="100%" 

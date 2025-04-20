@@ -1,0 +1,32 @@
+.main-content {
+  transition: margin-left 0.5s ease;
+  margin: 92px 120px 0px 300px;
+  color: gray;
+}
+.main-content.collapsed {
+  margin-left: 120px;
+}
+.user-card{
+  width: 400px;
+}
+.profile-name{
+  color:white;
+  font-size: 25px;
+}
+.profile-title{
+  padding-bottom: 15px;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+}
+.profile-content{
+  padding-top: 50px;
+}
+.profile-info{
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+.profile-info .right{
+  color: white;
+}

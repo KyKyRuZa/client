@@ -66,6 +66,10 @@ const Catalog = () => {
       }
   };
   const handlePayment = () => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
     const orderId = Date.now();
     navigate(`/payment/${orderId}`);
   };
@@ -95,13 +99,13 @@ const Catalog = () => {
           <div className="catalog-grid">
             {filteredProducts.map((product) => (
               <div key={product.id} className="catalog-card ">
-                <Link to={`/product/${product.id}`}
-                  className="catalog-img"
-                  style={{
-                    backgroundImage: `url(${product.imageUrl})`,
-                  }}
-                ></Link>
-                <Link to={`/product/${product.id}`} className="catalog-title">{product.name}</Link>
+                <Link to={`/product/${product.id}`} className="catalog-img" >
+                  <img
+                      src={product.imageUrl}
+                      alt={product.title}                    
+                  />
+                </Link>
+                <Link to={`/product/${product.id}`} className="catalog-title-black">{product.name}</Link>
                 <div className="catalog-subtitle">{product.description}</div>
                 <div className="catalog-price-container">
                   <div className="catalog-price">{product.price} ₽</div>

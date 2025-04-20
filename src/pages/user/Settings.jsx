@@ -1,9 +1,9 @@
 // Settings.js
 import React, { useState } from 'react';
-import { useAuth } from '../components/Auth/Auth';
+import { useAuth } from '../../components/Auth/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import profileService from '../api/profile';
+import profileService from '../../api/profile';
 
 export const Settings = () => {
     const { user } = useAuth();

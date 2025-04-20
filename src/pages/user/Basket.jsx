@@ -1,12 +1,12 @@
 // Basket.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/Auth/Auth';
-import InfoMessage from '../components/UI/InfoMessage';
+import { useAuth } from '../../components/Auth/Auth';
+import InfoMessage from '../../components/UI/InfoMessage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { IconButton } from '@mui/material';
-import basketService from '../api/basket';
+import basketService from '../../api/basket';
 
 export const Basket = () => {
     const { user } = useAuth();
@@ -16,7 +16,7 @@ export const Basket = () => {
     useEffect(() => {
         const fetchBasket = async () => {
             try {
-                const basketData = await basketService.fetchBasket(user.id); // Используем сервис
+                const basketData = await basketService.fetchBasket(user.id);
                 setBasketItems(basketData);
             } catch (error) {
                 console.error('Ошибка при получении корзины:', error);

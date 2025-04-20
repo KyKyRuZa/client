@@ -93,6 +93,83 @@
 /*=======================
     Media Section
 =======================*/
+
+@media (max-width: 768px) and (min-width: 426px) {
+    .product-page {
+        padding: 60px 20px; /* Reduce padding for smaller screens */
+    }
+
+    .product-container {
+        flex-direction: column; /* Stack elements vertically */
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .product-image-container {
+        flex: 0 0 100%; /* Make image container full width */
+    }
+
+    .product-image {
+        max-width: 100%; /* Ensure image fits within container */
+    }
+
+    .product-title {
+        font-size: 24px; /* Reduce font size for smaller screens */
+    }
+
+    .product-category {
+        font-size: 16px;
+    }
+
+    .product-description {
+        font-size: 14px;
+    }
+
+    .product-price {
+        font-size: 20px;
+    }
+
+    .buy-button {
+        padding: 10px 20px; /* Reduce button padding */
+    }
+}
+
+/* Media Query for 769px - 1024px */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .product-page {
+        padding: 80px 100px; /* Adjust padding for medium screens */
+    }
+
+    .product-container {
+        flex-direction: column;
+        gap: 30px; /* Slightly reduce gap between elements */
+        padding: 25px;
+    }
+
+    .product-image-container {
+        flex: 0 0 100%; /* Make image container full width */
+    }
+
+    .product-title {
+        font-size: 28px; /* Slightly reduce font size */
+    }
+
+    .product-category {
+        font-size: 17px;
+    }
+
+    .product-description {
+        font-size: 15px;
+    }
+
+    .product-price {
+        font-size: 22px;
+    }
+
+    .buy-button {
+        padding: 11px 25px; /* Adjust button padding */
+    }
+}
 @media (max-width: 425px) {
     .product-page {
         padding: 30px 20px;
