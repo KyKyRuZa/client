@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import authService from '../../api/auth';
 
 const AuthContext = createContext(null);
@@ -6,12 +7,32 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const protectedRoutes = [
+        '/profile',
+        '/admin-catalog',
+        '/orders',
+        '/basket',
+        '/sells',
+        '/settings',
+        'logs'
+    ];
 
     useEffect(() => {
         const user = authService.getCurrentUser();
         setUser(user);
         setLoading(false);
-    }, []);
+
+        const isProtectedRoute = protectedRoutes.some(route => 
+            location.pathname.startsWith(route)
+        );
+
+        if (isProtectedRoute && !user) {
+            navigate('/');
+        }
+    }, [location, navigate]);
 
     const login = async (credentials) => {
         const response = await authService.login(credentials);
@@ -28,6 +49,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         authService.logout();
         setUser(null);
+        navigate('/login');
     };
 
     const value = {

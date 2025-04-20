@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './Auth';
-import '../../styles/auth.css'
+import '../../styles/auth/auth.css'
 import '../../styles/global.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
@@ -33,11 +33,15 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         try {
-            await login(formData);
+            const response = await login(formData);
+            const user = JSON.parse(localStorage.getItem('user'));
             setMessage('Успешный вход!');
             setSeverity('success');
-            navigate(`/profile`);
+            if (user && user.role && user.id) {
+                navigate(`/profile/${user?.role}/${user?.id}`);
+            }
         } catch (err) {
             if (err.response?.data?.errors) {
                 setErrors(err.response.data.errors);
@@ -95,7 +99,7 @@ const Login = () => {
 
                     
 
-                    <button type="submit" className="auth-button">
+                    <button type="submit" className="auth-button" onClick={handleSubmit}>
                         Войти
                     </button>
                 </form>

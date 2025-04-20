@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import authService from '../../api/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import '../../styles/auth.css';
+import '../../styles/auth/auth.css';
 
 const ResetPassword = () => {
     const { token } = useParams();
